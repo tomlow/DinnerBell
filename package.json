@@ -1,0 +1,22 @@
+{
+  "type": "module",
+  "private": true,
+  "workspaces": [
+    "server",
+    "client",
+    "e2e"
+  ],
+  "scripts": {
+    "build:client": "yarn workspace dinner-bell-client build",
+    "dev": "yarn workspace dinner-bell-server dev",
+    "dev:debug": "yarn workspace dinner-bell-server dev:debug",
+    "heroku-postbuild": "yarn workspace dinner-bell-client build",
+    "start": "yarn workspace dinner-bell-server start",
+    "dev:cypress": "yarn workspace dinner-bell-server dev:e2e",
+    "e2e:open": "yarn workspace dinner-bell-e2e e2e:open",
+    "e2e:run": "yarn workspace dinner-bell-e2e e2e:run"
+  },
+  "engines": {
+    "node": "^14.15"
+  }
+}
