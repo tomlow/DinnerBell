@@ -58,6 +58,12 @@
   &__description {
     padding: 0 1rem;
   }
+
+  &__btn-container {
+    display: flex;
+    justify-content: flex-end;
+  }
+
   &__btn {
     padding: 1rem;
     font-family: inherit;
@@ -69,6 +75,7 @@
     color: var(--clr-primary);
     border-radius: var(--radius);
     transition: background 200ms ease-in, color 200ms ease-in;
+    align-items: flex-end;
   }
   &:hover {
     transform: scale(1.02);

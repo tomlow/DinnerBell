@@ -1,5 +1,5 @@
 class RecipeSerializer {
-  static async getSummary(recipe) {
+  static getSummary(recipe) {
     const allowedAttributes = ["id", "title", "image", "missedIngredients"]
 
     let serializedRecipe = {}
@@ -7,6 +7,7 @@ class RecipeSerializer {
     for (const attribute of allowedAttributes) {
       serializedRecipe[attribute] = recipe[attribute]
     }
+
     return serializedRecipe
   }
 }
