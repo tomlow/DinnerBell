@@ -10,21 +10,22 @@ const recipesRouter = new express.Router()
 recipesRouter.get("/", async (req, res) => {
   const ingredientList = req.query.ingredientList
   try {
-    debugger
     const recipeData = await SpoonacularClient.searchRecipeByIngredients(ingredientList)
-    console.log(recipeData[0]) //why is the recipedata behaving this way? get it up, style that and tge homepage. Save to a userRecipes database. Create a profile page for the current user. That's it. Then try to create some features with better recipe details, sorting, even some way to manage inventory. 
-    debugger
-    const serializedRecipeData = []
 
-    for (const recipe of recipeData) {
-      debugger
-      serializedRecipeData.push(RecipeSerializer.getSummary(recipe))
-    }
-    debugger
+    const serializedRecipeData = recipeData.map(recipe => {
+      return RecipeSerializer.getSummary(recipe)
+    })
+
+
     res.status(200).json({ recipeData: serializedRecipeData })
-  } catch (error) {
-    res.status(500).json({ error: error })
   }
+  // const recipeObject = {
+  //   recipeData: recipeData,
+  //   recipeInstructions: recipeInstructions
+  // }
+} catch (error) {
+  res.status(500).json({ error: error })
+}
 })
 
 // export default recipesRouter

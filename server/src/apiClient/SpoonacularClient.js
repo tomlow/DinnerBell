@@ -10,7 +10,8 @@ class SpoonacularClient {
       const url = `https://api.spoonacular.com/recipes/findByIngredients?ingredients=${ingredients}&number=1&ranking=2&apiKey=${spoonacularApiKey}`;
       const apiResponse = await got(url);
       const responseBody = apiResponse.body;
-      return responseBody;
+      const parsedBody = JSON.parse(responseBody)
+      return parsedBody;
     } catch (error) {
       return { error: error.message };
     }
