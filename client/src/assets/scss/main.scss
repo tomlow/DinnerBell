@@ -12,3 +12,19 @@
   -moz-tab-size: 4;
   tab-size: 4;
 }
+
+.app-container {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+div {
+  margin: 2 0 1rem 0;
+}
+
+input {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}

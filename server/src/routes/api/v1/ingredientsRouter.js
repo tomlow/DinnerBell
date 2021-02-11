@@ -1,7 +1,5 @@
 import express from "express"
 
-import SpoonacularClient from "../../../apiClient/SpoonacularClient.js";
-
 const ingredientsRouter = new express.Router()
 
 ingredientsRouter.get('/', async (req, res) => {
@@ -19,21 +17,6 @@ ingredientsRouter.get('/', async (req, res) => {
       amountAndIngredient.ingredientId = ingredient.id
       userAmountsAndIngredients.push(amountAndIngredient)
     }
-
-
-
-
-    SpoonacularClient.getRecipeByIngredients([{ name: "bananas" }, { name: "peanut butter" }]).then((data) => {
-      if (data.error) {
-        console.log(`Error from Open Weather: ${data.error}`);
-      } else {
-        const parsedResponse = JSON.parse(data);
-        res
-          .set({ "Content-Type": "application/json" })
-          .status(200)
-          .json({ weatherForecast: parsedResponse });
-      }
-    });
 
     res.status(200).json({ userAmountsAndIngredients: userAmountsAndIngredients })
 

@@ -1,7 +1,7 @@
 import React from "react"
 
 const HomePage = (props) => {
-  return <div>
+  return <div className="app-container">
     <div className="text-center headers">
       <h1>Welcome to DinnerBell</h1>
       <h2>What's on the menu?</h2>

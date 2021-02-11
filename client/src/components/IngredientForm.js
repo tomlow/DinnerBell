@@ -13,7 +13,6 @@ const IngredientForm = (props) => {
     })
   }
 
-
   return <div>
     <form>
       <label>Ingredient Name:
