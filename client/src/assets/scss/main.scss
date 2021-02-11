@@ -6,25 +6,84 @@
 *::before,
 *::after {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 :root {
   -moz-tab-size: 4;
   tab-size: 4;
+  --clr-gray200: #cfd8dc;
+  --clr-primary: #d50000;
+
+  --radius: 0.2rem;
 }
 
-.app-container {
+body {
+  font-family: "Merriweather", "Muli";
+  margin: 2rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(12rem, 16rem));
+  grid-gap: 2rem;
+  justify-content: center;
+}
+
+.topbar {
+  width: 100%;
+}
+
+.card {
+  overflow: hidden;
+  box-shadow: 0px 2px 20px var(--clr-gray200);
+  border-radius: var(--radius);
   display: flex;
-  align-items: center;
   flex-direction: column;
-}
+  justify-content: space-between;
+  cursor: pointer;
+  transition: transform 200ms ease-in;
 
-div {
-  margin: 2 0 1rem 0;
+  &__image {
+    height: 12rem;
+    width: 100%;
+    object-fit: cover;
+  }
+
+  &__title {
+    padding: 1rem;
+  }
+
+  &__description {
+    padding: 0 1rem;
+  }
+  &__btn {
+    padding: 1rem;
+    font-family: inherit;
+    font-weight: bold;
+    font-size: 1rem;
+    margin: 1rem;
+    border: 2px solid var(--clr-primary);
+    background: transparent;
+    color: var(--clr-primary);
+    border-radius: var(--radius);
+    transition: background 200ms ease-in, color 200ms ease-in;
+  }
+  &:hover {
+    transform: scale(1.02);
+  }
+
+  &:hover &__btn {
+    background: var(--clr-primary);
+    color: white;
+  }
 }
 
 input {
   display: flex;
   align-items: center;
   flex-direction: column;
+}
+
+h1 {
+  font-family: "Merriweather", Serif;
+  font-size: 46px;
 }

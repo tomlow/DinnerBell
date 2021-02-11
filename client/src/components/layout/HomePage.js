@@ -7,7 +7,7 @@ const HomePage = (props) => {
       <h2>What's on the menu?</h2>
     </div>
     <div className="text-center">
-      <button>Sign In</button> or <button>Sign Up</button>
+      <button className="sign-in button">Sign In</button> or <button className="sign-up button">Sign Up</button>
       <p>Big ol' image</p>
     </div>
   </div>

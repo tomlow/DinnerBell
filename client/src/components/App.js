@@ -8,8 +8,8 @@ import RegistrationForm from "./registration/RegistrationForm";
 import SignInForm from "./authentication/SignInForm";
 import TopBar from "./layout/TopBar";
 import AuthenticatedRoute from "./authentication/AuthenticatedRoute.js"
-import PantryList from "./PantryList.js"
-import HomePage from "./HomePage.js"
+import PantryList from "./ingredients/PantryList.js"
+import HomePage from "./layout/HomePage.js"
 
 const App = (props) => {
   const [currentUser, setCurrentUser] = useState(undefined);

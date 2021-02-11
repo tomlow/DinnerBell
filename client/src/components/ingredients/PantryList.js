@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react"
 import _ from "lodash"
 
-import RecipeTile from "./RecipeTile.js"
+import RecipeTile from "../recipes/RecipeTile.js"
 
 import IngredientForm from "./IngredientForm"
 const PantryList = (props) => {
