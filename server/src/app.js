@@ -8,7 +8,7 @@ import configuration from "./config.js";
 import addMiddlewares from "./middlewares/addMiddlewares.js";
 import rootRouter from "./routes/rootRouter.js";
 
-if (config.nodeEnv !== "production") {
+if (config.nodeEnv === "development") {
   import dotenv from "dotenv"
   dotenv.config()
 }

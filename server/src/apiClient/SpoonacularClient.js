@@ -1,7 +1,7 @@
 import got from "got";
 
 
-if (config.nodeEnv !== "production") {
+if (config.nodeEnv === "development") {
   import dotenv from "dotenv"
   dotenv.config()
 }
