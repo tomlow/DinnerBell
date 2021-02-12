@@ -1,12 +1,6 @@
 import got from "got";
 
-console.log(config.nodeEnv)
-if (config.nodeEnv === "development") {
-  import dotenv from "dotenv"
-  dotenv.config()
-}
-
-const spoonacularApiKey = process.env.SPOONACULAR_API_KEY
+const spoonacularApiKey = process.env.SPOONACULAR_API_KEY;
 class SpoonacularClient {
   static async searchRecipeByIngredients(ingredients) {
     try {
