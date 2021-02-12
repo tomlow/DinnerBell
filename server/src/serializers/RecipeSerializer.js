@@ -1,19 +1,16 @@
-import SpoonacularClient from "../apiClient/SpoonacularClient.js"
+// import SpoonacularClient from "../apiClient/SpoonacularClient.js"
 
 class RecipeSerializer {
-  static async getSummary(recipe) {
-    const allowedAttributes = ["id", "title", "image", "missedIngredients"]
+  static getSummary(recipe) {
+    const allowedAttributes = ["id", "title", "image", "missedIngredients", "summary"]
 
     let serializedRecipe = {}
 
     for (const attribute of allowedAttributes) {
       serializedRecipe[attribute] = recipe[attribute]
     }
-    debugger
-    const recipeSummary = SpoonacularClient.getRecipeSummary(recipe.id)
-    debugger
-    serializedRecipe.summary = recipeSummary
-    debugger
+    // const recipeSummary = await SpoonacularClient.getRecipeSummary(recipe.id)
+    // serializedRecipe.summary = recipeSummary
     return serializedRecipe
   }
 }

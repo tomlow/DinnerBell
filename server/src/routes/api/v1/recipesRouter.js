@@ -9,19 +9,14 @@ recipesRouter.get("/", async (req, res) => {
   try {
     const recipeData = await SpoonacularClient.searchRecipeByIngredients(ingredientList)
 
-    debugger
+    for (const recipe of recipeData) {
+      const recipeSummary = await SpoonacularClient.getRecipeSummary(recipe.id)
+      recipe.summary = recipeSummary.summary
+    }
 
     const serializedRecipeData = recipeData.map(recipe => {
-      debugger
       return RecipeSerializer.getSummary(recipe)
     })
-
-    debugger
-
-    // const recipeObject = {
-    //   recipeData: recipeData,
-    //   recipeInstructions: recipeInstructions
-    // }
 
     res.status(200).json({ recipeData: serializedRecipeData })
   }

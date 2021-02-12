@@ -21,7 +21,7 @@ class SpoonacularClient {
 
   static async getRecipeSummary(recipeId) {
     try {
-      const url = `https://api.spoonacular.com/recipes/${recipeId}/summary`;
+      const url = `https://api.spoonacular.com/recipes/${recipeId}/summary?apiKey=${spoonacularApiKey}`;
       const apiResponse = await got(url);
       const responseBody = apiResponse.body;
       const parsedBody = JSON.parse(responseBody)
