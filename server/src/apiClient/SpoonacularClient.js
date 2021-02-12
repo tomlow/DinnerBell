@@ -1,10 +1,9 @@
 import got from "got";
+import dotenv from "dotenv"
 
 
-// if (config.nodeEnv === "development") {
-//   import dotenv from "dotenv"
-//   dotenv.config()
-// }
+dotenv.config()
+
 
 const spoonacularApiKey = process.env.SPOONACULAR_API_KEY
 class SpoonacularClient {
@@ -17,6 +16,18 @@ class SpoonacularClient {
       return parsedBody;
     } catch (error) {
       return { error: error.message };
+    }
+  }
+
+  static async getRecipeSummary(recipeId) {
+    try {
+      const url = `https://api.spoonacular.com/recipes/${recipeId}/summary`;
+      const apiResponse = await got(url);
+      const responseBody = apiResponse.body;
+      const parsedBody = JSON.parse(responseBody)
+      return parsedBody
+    } catch (error) {
+      return { error: error.message }
     }
   }
 }

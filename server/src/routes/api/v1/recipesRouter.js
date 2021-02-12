@@ -1,9 +1,6 @@
 import express from "express"
 import SpoonacularClient from "../../../apiClient/SpoonacularClient.js"
 import RecipeSerializer from "../../../serializers/RecipeSerializer.js"
-// import SpoonacularApi from 'spoonacular_api';
-// import dotenv from "dotenv"
-// dotenv.config()
 
 const recipesRouter = new express.Router()
 
@@ -12,15 +9,20 @@ recipesRouter.get("/", async (req, res) => {
   try {
     const recipeData = await SpoonacularClient.searchRecipeByIngredients(ingredientList)
 
+    debugger
+
     const serializedRecipeData = recipeData.map(recipe => {
+      debugger
       return RecipeSerializer.getSummary(recipe)
     })
+
+    debugger
 
     // const recipeObject = {
     //   recipeData: recipeData,
     //   recipeInstructions: recipeInstructions
     // }
-    debugger
+
     res.status(200).json({ recipeData: serializedRecipeData })
   }
   catch (error) {
