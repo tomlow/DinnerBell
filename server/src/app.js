@@ -2,7 +2,6 @@ import express from "express";
 import path from "path";
 import dotenv from "dotenv"
 import logger from "morgan";
-import dotenv from "dotenv"
 import bodyParser from "body-parser";
 import { fileURLToPath } from "url";
 import "./boot.js";
