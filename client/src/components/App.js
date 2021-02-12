@@ -8,7 +8,7 @@ import RegistrationForm from "./registration/RegistrationForm";
 import SignInForm from "./authentication/SignInForm";
 import TopBar from "./layout/TopBar";
 import AuthenticatedRoute from "./authentication/AuthenticatedRoute.js"
-import PantryList from "./ingredients/PantryList.js"
+import IngredientsList from "./ingredients/IngredientsList.js"
 import HomePage from "./layout/HomePage.js"
 
 const App = (props) => {
@@ -25,12 +25,14 @@ const App = (props) => {
   return (
     <Router>
       <TopBar user={currentUser} />
-      <Switch>
-        <Route exact path="/" component={HomePage} />
-        <Route exact path="/users/new" component={RegistrationForm} />
-        <Route exact path="/user-sessions/new" component={SignInForm} />
-        <AuthenticatedRoute exact path="/pantry" component={PantryList} />
-      </Switch>
+      <div className="grid-container">
+        <Switch>
+          <Route exact path="/" component={HomePage} />
+          <Route exact path="/users/new" component={RegistrationForm} />
+          <Route exact path="/user-sessions/new" component={SignInForm} />
+          <AuthenticatedRoute exact path="/pantry" component={IngredientsList} />
+        </Switch>
+      </div>
     </Router>
   );
 };
