@@ -19,7 +19,7 @@
   --radius: 0.2rem;
 }
 
-body {
+.tile-container {
   font-family: "Merriweather", "Muli";
   margin: 2rem;
   display: grid;
@@ -28,8 +28,10 @@ body {
   justify-content: center;
 }
 
-.topbar {
-  width: 100%;
+.grid-container {
+  max-width: 75rem;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .card {
@@ -41,11 +43,19 @@ body {
   justify-content: space-between;
   cursor: pointer;
   transition: transform 200ms ease-in;
+  text-align: center;
 
   &__image {
     height: 12rem;
     width: 100%;
     object-fit: cover;
+  }
+
+  &__content-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    text-align: center;
   }
 
   &__title {
@@ -55,6 +65,11 @@ body {
   &__description {
     padding: 0 1rem;
   }
+
+  &__btn-container {
+    align-items: flex-end;
+  }
+
   &__btn {
     padding: 1rem;
     font-family: inherit;
@@ -66,6 +81,7 @@ body {
     color: var(--clr-primary);
     border-radius: var(--radius);
     transition: background 200ms ease-in, color 200ms ease-in;
+    align-items: flex-end;
   }
   &:hover {
     transform: scale(1.02);

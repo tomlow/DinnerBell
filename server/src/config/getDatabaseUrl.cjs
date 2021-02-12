@@ -4,7 +4,7 @@ const getDatabaseUrl = (nodeEnv) => {
       development: "postgres://postgres:postgres@localhost:5432/dinner-bell_development",
       test: "postgres://postgres:postgres@localhost:5432/dinner-bell_test",
       e2e: "postgres://postgres:postgres@localhost:5432/dinner-bell_e2e",
-    }[nodeEnv] || process.env.DATABASE_URL
+    }[nodeEnv] || `${process.env.DATABASE_URL}?sslmode=require`
   );
 };
 

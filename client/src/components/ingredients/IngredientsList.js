@@ -4,7 +4,7 @@ import _ from "lodash"
 import RecipeTile from "../recipes/RecipeTile.js"
 
 import IngredientForm from "./IngredientForm"
-const PantryList = (props) => {
+const IngredientsList = (props) => {
 
   const [inventory, setInventory] = useState([])
   const [recipes, setRecipes] = useState([])
@@ -48,8 +48,8 @@ const PantryList = (props) => {
       }
       const responseBody = await response.json()
       const recipeData = responseBody.recipeData
-      console.log(recipeData)
       setRecipes(recipeData)
+
     } catch (error) {
       console.error(`Error in fetch: ${error.message}`);
     }
@@ -60,7 +60,7 @@ const PantryList = (props) => {
   let recipeDisplay = ""
 
   if (!_.isEmpty(recipes)) {
-    recipeDisplay = <div>{recipes.map(recipe => {
+    recipeDisplay = <div className="tile-container">{recipes.map(recipe => {
       return <RecipeTile recipe={recipe} />
     })}</div>
   }
@@ -83,4 +83,4 @@ const PantryList = (props) => {
   </div>
 }
 
-export default PantryList
+export default IngredientsList
