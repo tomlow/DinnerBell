@@ -1,18 +1,15 @@
 import express from "express";
 import path from "path";
 import logger from "morgan";
+import dotenv from "dotenv"
 import bodyParser from "body-parser";
 import { fileURLToPath } from "url";
 import "./boot.js";
 import configuration from "./config.js";
 import addMiddlewares from "./middlewares/addMiddlewares.js";
 import rootRouter from "./routes/rootRouter.js";
-console.log(config.nodeEnv)
 
-if (config.nodeEnv === "development") {
-  import dotenv from "dotenv"
-  dotenv.config()
-}
+dotenv.config()
 
 const __filename = fileURLToPath(import.meta.url);
 
