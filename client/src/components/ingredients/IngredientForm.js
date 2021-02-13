@@ -6,11 +6,18 @@ const IngredientForm = (props) => {
     name: ""
   })
 
-  const handleInputChange = (event) => {
+  const handleInputChange = async (event) => {
     setIngredientRecord({
       ...ingredientRecord,
       [event.currentTarget.name]: event.currentTarget.value
     })
+    try {
+      const response = await fetch(`/ingredients/autocomplete/${ingredientRecord.name}`)
+
+    } catch (error) {
+
+    }
+
   }
 
   return <div>
