@@ -82,6 +82,7 @@
     border-radius: var(--radius);
     transition: background 200ms ease-in, color 200ms ease-in;
     align-items: flex-end;
+    cursor: pointer;
   }
   &:hover {
     transform: scale(1.02);
@@ -102,4 +103,8 @@ input {
 h1 {
   font-family: "Merriweather", Serif;
   font-size: 46px;
+}
+
+#recipe-show-link {
+  color: black;
 }

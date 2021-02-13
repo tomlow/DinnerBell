@@ -2,7 +2,7 @@
 
 class RecipeSerializer {
   static getSummary(recipe) {
-    const allowedAttributes = ["id", "title", "image", "missedIngredients", "summary"]
+    const allowedAttributes = ["id", "title", "image", "missedIngredients", "usedIngredients", "analyzedInstructions", "extendedIngredients", "readyInMinutes", "servings", "summary"]
 
     let serializedRecipe = {}
 
