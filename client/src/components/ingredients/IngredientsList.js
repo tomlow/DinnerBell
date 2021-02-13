@@ -57,7 +57,7 @@ const IngredientsList = (props) => {
     //Dream feature: have a filter you could use to display only certain recipes. Like, check off dietary restrictions, etc.  
   }
 
-  let recipeDisplay = ""
+  let recipeDisplay = "" //set this up to have a loading page. 
 
   if (!_.isEmpty(recipes)) {
     recipeDisplay = <div className="tile-container">{recipes.map(recipe => {
