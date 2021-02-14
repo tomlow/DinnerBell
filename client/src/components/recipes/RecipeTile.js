@@ -3,6 +3,19 @@ import { Link } from "react-router-dom"
 
 const RecipeTile = ({ recipe }) => {
   const recipeId = recipe.id
+  const truncateRecipeSummary = (recipeSummary) => {
+    if (recipeSummary.length > 100) {
+      const truncatedRecipeSummary = recipe.summary.substr(0, 100) + "..."
+      return truncatedRecipeSummary
+    }
+    else return recipeSummary
+  }
+  const truncateRecipeTitle = (recipeTitle) => {
+    if (recipeTitle.length > 25) {
+      const truncatedRecipeTitle = recipe.title.substr(0, 25) + "..."
+      return truncatedRecipeTitle
+    } else return recipeTitle
+  }
 
   return <div className="card">
 
@@ -18,10 +31,10 @@ const RecipeTile = ({ recipe }) => {
           src={recipe.image} alt="tasty recipe image" className="card__image"
         />
         <h3
-          className="card__title">{recipe.title}
+          className="card__title">{truncateRecipeTitle(recipe.title)}
         </h3>
         <p
-          dangerouslySetInnerHTML={{ __html: recipe.summary }}
+          dangerouslySetInnerHTML={{ __html: truncateRecipeSummary(recipe.summary) }}
         />
       </Link>
       <div className="card__button-container">

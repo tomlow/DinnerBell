@@ -36,26 +36,22 @@ class User extends uniqueFunc(Model) {
   }
 
   static get relationMappings() {
-    const { Amount, Ingredient } = require("./index.js")
+    const { Ingredient } = require("./index.js")
     return {
-      amounts: {
-        relation: Model.HasManyRelation,
-        modelClass: Amount,
-        join: {
-          from: "users.id",
-          to: "amounts.userId"
-        }
-      },
+      // amounts: {
+      //   relation: Model.HasManyRelation,
+      //   modelClass: Amount,
+      //   join: {
+      //     from: "users.id",
+      //     to: "amounts.userId"
+      //   }
+      // },
       ingredients: {
-        relation: Model.ManyToManyRelation,
+        relation: Model.HasManyRelation,
         modelClass: Ingredient,
         join: {
           from: "users.id",
-          through: {
-            from: "amounts.userId",
-            to: "amounts.ingredientId"
-          },
-          to: "ingredients.id"
+          to: "ingredients.userId"
         }
       }
     }

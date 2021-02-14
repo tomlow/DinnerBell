@@ -8,6 +8,7 @@ const IngredientsList = (props) => {
 
   const [inventory, setInventory] = useState([])
   const [recipes, setRecipes] = useState([])
+  const [excludedIngredients, setExcludedIngredients] = useState("")
 
   const fetchInventory = async () => {
     try {
@@ -16,7 +17,7 @@ const IngredientsList = (props) => {
         throw new Error(`${response.status} (${response.statusText})`)
       }
       const responseBody = await response.json()
-      const inventory = responseBody.userAmountsAndIngredients
+      const inventory = responseBody.ingredients
       setInventory(inventory)
     } catch (error) {
       console.error(`Error in fetch: ${error.message}`)
@@ -27,20 +28,20 @@ const IngredientsList = (props) => {
     fetchInventory()
   }, [])
 
-  const inventoryList = inventory.map(amountAndIngredient => {
-    return (<li key={amountAndIngredient.amountId}>
-      {amountAndIngredient.quantity} {amountAndIngredient.unit} {amountAndIngredient.ingredientName}
+  const inventoryList = inventory.map((ingredient, index) => {
+    return (<li key={index}>
+      {ingredient.name}
     </li>
     )
   })
 
-  const ingredientList = inventory.map(amountAndIngredient => {
-    return amountAndIngredient.ingredientName
+  const ingredientList = inventory.map(ingredient => {
+    return ingredient.name
   }).join(",")
 
-  const onClickHandler = async (props) => {
+  const onClickHandler = async () => {
     try {
-      const response = await fetch(`/api/v1/recipes/?ingredientList=${ingredientList}`)
+      const response = await fetch(`/api/v1/recipes/?ingredientList=${ingredientList}&excludedIngredients=${excludedIngredients}`)
       if (!response.ok) {
         const errorMessage = `${response.status} (${response.statusText})`
         const error = new Error(errorMessage);
@@ -57,17 +58,19 @@ const IngredientsList = (props) => {
     //Dream feature: have a filter you could use to display only certain recipes. Like, check off dietary restrictions, etc.  
   }
 
+  const onChangeHandler = (event) => {
+    setExcludedIngredients(event.currentTarget.value)
+    console.log(excludedIngredients)
+  }
+
   let recipeDisplay = "" //set this up to have a loading page. 
 
   if (!_.isEmpty(recipes)) {
-    recipeDisplay = <div className="tile-container">{recipes.map(recipe => {
-      return <RecipeTile recipe={recipe} />
+    recipeDisplay = <div className="tile-container">{recipes.map((recipe, index) => {
+      return <RecipeTile key={index} recipe={recipe} />
     })}</div>
   }
 
-  const recipeButton = <div>
-    <button className="button" onClick={onClickHandler}>What's for Dinner?</button>
-  </div>
 
   return <div>
     <IngredientForm />
@@ -78,7 +81,12 @@ const IngredientsList = (props) => {
     <ul>
       {inventoryList}
     </ul>
-    {recipeButton}
+    <label>Anything you don't want to cook with? List it here!
+      <input type="text" id="excludedIngredients" name="excludedIngredients" value={excludedIngredients} onChange={onChangeHandler} />
+    </label>
+    <div>
+      <button className="button" onClick={onClickHandler}>What's for Dinner?</button>
+    </div>
     {recipeDisplay}
   </div>
 }
