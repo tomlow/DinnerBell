@@ -6,9 +6,10 @@ const recipesRouter = new express.Router()
 
 recipesRouter.get("/", async (req, res) => {
   const ingredientList = req.query.ingredientList
-  if (req.query.excludedIngredients !== "") {
-    const excludedIngredients = req.query.excludedIngredients.split(", ")
-  }
+  // let excludedIngredients;
+  // if (req.query.excludedIngredients !== "") {
+  //   excludedIngredients = req.query.excludedIngredients.split(", ")
+  // }
   try {
     const recipeData = await SpoonacularClient.searchRecipeByIngredients(ingredientList)
 
@@ -17,22 +18,22 @@ recipesRouter.get("/", async (req, res) => {
     for (const recipe of recipeData) {
       const recipeInformation = await SpoonacularClient.getRecipeInformation(recipe.id)
       if (recipeInformation.instructions !== null && recipeInformation.analyzedInstructions !== []) {
-        excludedIngredients.forEach(excludedIngredient => {
+        // excludedIngredients.forEach(excludedIngredient => {
 
-          recipeInformation.extendedIngredients.forEach(ingredient => {
+        //   recipeInformation.extendedIngredients.forEach(ingredient => {
 
-            if (ingredient.name === excludedIngredient.name) {
+        //     if (ingredient.name === excludedIngredient.name) {
 
-              return
-            }
-            else if (recipesWithInstructions.length < 18) {
-              //fix this logic so you're actually excluding things, and so it won't break if you aren't
-              recipeInformation.missedIngredients = recipe.missedIngredients
-              recipeInformation.usedIngredients = recipe.usedIngredients
-              recipesWithInstructions.push(recipeInformation)
-            }
-          })
-        })
+        //       return
+        //     } else 
+        if (recipesWithInstructions.length < 18) {
+          //fix this logic so you're actually excluding things, and so it won't break if you aren't
+          recipeInformation.missedIngredients = recipe.missedIngredients
+          recipeInformation.usedIngredients = recipe.usedIngredients
+          recipesWithInstructions.push(recipeInformation)
+        }
+        //   })
+        // })
       }
     }
     debugger

@@ -1,10 +1,12 @@
 import React, { useState } from "react"
+import { Redirect } from "react-router-dom"
 
 const IngredientForm = (props) => {
 
   const [ingredientRecord, setIngredientRecord] = useState({
     name: ""
   })
+  const [shouldRedirect, setShouldRedirect] = useState(false)
 
   const postIngredient = async (formPayload) => {
     const response = await fetch('/api/v1/ingredients', {
@@ -25,7 +27,9 @@ const IngredientForm = (props) => {
         throw error
       }
     }
+
     else {
+      setShouldRedirect(true)
       setErrors([])
     }
   }
@@ -43,14 +47,18 @@ const IngredientForm = (props) => {
     setIngredientRecord({ name: "" })
   }
 
+  if (shouldRedirect) {
+    return <Redirect to="/pantry" />
+  }
+
   return <div>
     <form onSubmit={onSubmitHandler}>
       <label>Ingredient Name:
         <input type="text" id="name" name="name" value={ingredientRecord.name} onChange={handleInputChange} />
-      </label>
+      </label >
       <input className="button" type="submit" value="Put it in the Pantry" onSubmit={onSubmitHandler} />
-    </form>
-  </div>
+    </form >
+  </div >
 }
 
 export default IngredientForm

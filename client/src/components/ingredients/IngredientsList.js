@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react"
+import { Link } from "react-router-dom"
 import _ from "lodash"
 
 import RecipeTile from "../recipes/RecipeTile.js"
@@ -28,10 +29,46 @@ const IngredientsList = (props) => {
     fetchInventory()
   }, [])
 
+  const editIngredient = async (ingredientId) => {
+    try {
+      const response = await fetch(`/api/v1/ingredients/${ingredientId}`, {
+        method: "PATCH",
+        headers: new Headers({
+          "Content-Type": "application/json",
+        }),
+        body: JSON.stringify(ingredientId),
+      })
+    } catch (error) {
+      console.error(`Error in fetch: ${error.message}`)
+    }
+  }
+
+  const deleteIngredient = async (ingredientId) => {
+    try {
+      const response = await fetch(`/api/v1/ingredients/${ingredientId}`, {
+        method: "DELETE",
+        headers: new Headers({
+          "Content-Type": "application/json",
+        }),
+        body: JSON.stringify(ingredientId),
+      })
+    } catch (error) {
+      console.error(`Error in fetch: ${error.message}`)
+    }
+  }
+
+  //create edit and delete functionality for ingredients. 
+
   const inventoryList = inventory.map((ingredient, index) => {
-    return (<li key={index}>
-      {ingredient.name}
-    </li>
+    return (
+      <li key={index}>{ingredient.name}
+        <Link className="button" to={`/ingredients/edit/${ingredient.id}`}>
+          Edit
+        </Link>
+        <Link className="button" to={`/ingredients/delete/${ingredient.id}`}>
+          Remove
+        </Link>
+      </li>
     )
   })
 
