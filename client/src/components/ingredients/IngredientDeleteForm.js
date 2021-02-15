@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import { Redirect } from "react-router-dom"
 
 const IngredientDeleteForm = (props) => {
@@ -9,6 +9,22 @@ const IngredientDeleteForm = (props) => {
 
   const { id: ingredientId } = props.match.params
 
+  const fetchIngredient = async () => {
+    try {
+      const response = await fetch(`/api/v1/ingredients/${ingredientId}`)
+      if (!response.ok) {
+        throw new Error(`${response.status} (${response.statusText})`)
+      }
+      const body = await response.json()
+      setIngredientRecord(body.ingredient)
+    } catch (error) {
+      console.error(error.message)
+    }
+  }
+
+  useEffect(() => {
+    fetchIngredient()
+  }, [])
 
   const deleteIngredient = async (ingredientPayload) => {
     try {
@@ -27,7 +43,7 @@ const IngredientDeleteForm = (props) => {
 
   const onSubmitHandler = (event) => {
     event.preventDefault()
-    deleteIngredient(ingredientId)
+    deleteIngredient(ingredientRecord)
   }
 
   const returnToPantry = (event) => {

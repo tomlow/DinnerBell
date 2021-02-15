@@ -1,10 +1,13 @@
 import React from "react"
 import { Link } from "react-router-dom"
-const HomePage = (props) => {
+const HomePage = ({ user }) => {
+
+  const signUpRoute = "/users/new"
+  const pantryRoute = "/pantry"
   return <div>
     <div className="text-center headers">
       <h1>Welcome to DinnerBell</h1>
-      <h2>What's on the menu?</h2>
+      <Link to={user ? pantryRoute : signUpRoute}><h2>let's get cooking</h2></Link>
     </div>
     <div className="text-center grid-x grid-padding-x align-spaced">
       <button className="sign-in button">Sign In</button> <button className="sign-up button">Sign Up</button>

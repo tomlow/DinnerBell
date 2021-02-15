@@ -1,11 +1,23 @@
 import express from "express"
 import SpoonacularClient from "../../../apiClient/SpoonacularClient.js"
 import RecipeSerializer from "../../../serializers/RecipeSerializer.js"
+import userRecipesRouter from "./userRecipesRouter.js"
+
+import Recipe from "../../../models/Recipe.js"
+import MissedIngredient from "../../../models/MissedIngredient.js"
+import UsedIngredient from "../../../models/UsedIngredient.js"
+import RecipeIngredient from "../../../models/RecipeIngredient.js"
+import Instruction from "../../../models/Instruction.js"
+import IngredientDeleteForm from "../../../../../client/src/components/ingredients/IngredientDeleteForm.js"
 
 const recipesRouter = new express.Router()
 
+recipesRouter.use('/userRecipes', userRecipesRouter)
+
 recipesRouter.get("/", async (req, res) => {
   const ingredientList = req.query.ingredientList
+
+
   // let excludedIngredients;
   // if (req.query.excludedIngredients !== "") {
   //   excludedIngredients = req.query.excludedIngredients.split(", ")
@@ -66,46 +78,35 @@ recipesRouter.get("/recipeById", async (req, res) => {
   }
 })
 
+recipesRouter.post("/", async (req, res) => {
+  const userId = req.user.id
+  const recipeData = req.body
+  const recipeId = recipeData.id
+  const { title, summary, image, missedIngredients, usedIngredients, extendedIngredients, analyzedInstructions, glutenFree, dairyFree, vegan, vegetarian, readyInMinutes, servings } = recipeData
+  debugger
+  try {
+    await Recipe.query().insert({ title, summary, image, glutenFree, dairyFree, vegan, vegetarian, readyInMinutes, servings, userId })
+
+    if (missedIngredients.length > 0) {
+      for (const missedIngredient of missedIngredients) {
+        const { name } = missedIngredient
+        await MissedIngredient.query().insert({ name, recipeId })
+      }
+    }
+
+    for (const usedIngredient of usedIngredients) {
+      const { name } = usedIngredient
+      await UsedIngredient.query().insert({ name, recipeId })
+    }
+
+    //finish filling out this router stuff. Then set up the profile page. Then I think you're set to take a walk through the site, or to start big on styling. 
+
+    //Don't like the state reset issue on ingredientslist. Probably want to rename/rearrange some components. Okay. Commit and call it for the night. 
+  } catch (error) {
+
+  }
+})
+
+//this is where you query and insert different pieces of the data into the databases, running for each loops on the ingredients to insert them. You just gotta make sure you have the relations set up, so that they're properly associated for the get later. 
+
 export default recipesRouter
-
-  // const recipesRouter = new express.Router()
-
-
-  // //worst case, see how these methods work. 
-
-  // recipesRouter.get("/", async (req, res) => {
-
-  //   let defaultClient = SpoonacularApi.ApiClient.instance;  
-  //   // Configure API key authorization: apiKeyScheme
-  //   let apiKeyScheme = defaultClient.authentications['apiKeyScheme'];
-  //   console.log(process.env.SPOONACULAR_API_KEY)
-  //   apiKeyScheme.apiKey = process.env.SPOONACULAR_API_KEY;
-  //   // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-  //   //apiKeyScheme.apiKeyPrefix = 'Token';
-
-  //   let apiInstance = new SpoonacularApi.DefaultApi();
-  //   let ingredients = `apples, flour, sugar`; // String | A comma-separated list of ingredients that the recipes should contain.
-  //   let opts = {
-  //     '_number': 10, // Number | The maximum number of recipes to return (between 1 and 100). Defaults to 10.  
-  //     'limitLicense': true, // Boolean | Whether the recipes should have an open license that allows display with proper attribution.
-  //     'ranking': 1, // Number | Whether to maximize used ingredients (1) or minimize missing ingredients (2) first.
-  //     'ignorePantry': true // Boolean | Whether to ignore typical pantry items, such as water, salt, flour, etc.
-  //   };
-
-  //   apiInstance.searchRecipesByIngredients(ingredients, opts, (error, data, response) => {
-  //     if (error) {
-  //       console.error(error);  
-  //     } else {
-  //       console.log('API called successfully. Returned data: ' + data);  
-  //     }
-  //   });
-  // try {
-
-  //   res.status(200).json({ recipeData: recipeData })  
-  // } catch (error) {
-  //   res.status(500).json({ error: error })  
-  // }
-  // })
-
-
-

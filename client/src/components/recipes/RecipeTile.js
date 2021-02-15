@@ -16,6 +16,31 @@ const RecipeTile = ({ recipe }) => {
       return truncatedRecipeTitle
     } else return recipeTitle
   }
+  console.log(recipe.id)
+  const saveRecipe = async (recipePayload) => {
+    try {
+      const response = await fetch("/api/v1/recipes", {
+        method: "POST",
+        headers: new Headers({
+          "Content-Type": "application/json"
+        }),
+        body: JSON.stringify(recipePayload)
+      })
+      if (!response.ok) {
+        debugger
+        const errorMessage = `${response.status} (${response.statusText})`
+        const error = new Error(errorMessage)
+        throw error
+      }
+      alert("Recipe saved!")
+    } catch (error) {
+      console.error(`Error in fetch: ${error.message}`)
+    }
+  }
+
+  const onSaveHandler = () => {
+    saveRecipe(recipe)
+  }
 
   return <div className="card">
 
@@ -39,7 +64,7 @@ const RecipeTile = ({ recipe }) => {
       </Link>
       <div className="card__button-container">
         <button
-          className="card__btn" onClick={() => { alert("Recipe saved!") }}>
+          className="card__btn" onClick={onSaveHandler}>
           Save Recipe
           </button>
       </div>

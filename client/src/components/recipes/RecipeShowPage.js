@@ -7,7 +7,7 @@ const RecipeShowPage = (props) => {
     return <li key={index}>{step.step}</li>
   })
   const recipeIngredients = recipe.extendedIngredients.map((ingredient, index) => {
-    return <li key={index}>{ingredient.measures.us.amount} {ingredient.measures.us.unitLong} {ingredient.meta[0]} {ingredient.name}</li>
+    return <li key={index}>{ingredient.measures.us.amount} {ingredient.measures.us.unitLong} {ingredient.name}</li>
   })
 
   return <div>
