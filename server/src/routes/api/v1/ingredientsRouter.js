@@ -18,7 +18,6 @@ ingredientsRouter.get('/', async (req, res) => {
     //   amountAndIngredient.ingredientId = ingredient.id
     //   userAmountsAndIngredients.push(amountAndIngredient)
     // }
-
     res.status(200).json({ ingredients: userIngredients })
 
   } catch (error) {
@@ -39,12 +38,10 @@ ingredientsRouter.get('/:ingredientId', async (req, res) => {
 
 ingredientsRouter.post("/", async (req, res) => {
   try {
-    debugger
     const { body } = req
     const formInput = cleanUserInput(body)
     const { name } = formInput
     const userId = req.user.id
-    debugger
     const newIngredient = await Ingredient.query().insertAndFetch({ name, userId })
     return res.status(201).json({ ingredient: newIngredient })
   } catch (error) {
@@ -75,10 +72,8 @@ ingredientsRouter.patch("/:id", async (req, res) => {
 
 ingredientsRouter.delete("/:ingredientId", async (req, res) => {
   try {
-    debugger
     const { ingredientId } = req.params
     await Ingredient.query().findById(ingredientId).delete()
-    debugger
     return res.status(201).json()
   } catch (error) {
     if (error instanceof ValidationError) {

@@ -1,13 +1,26 @@
 import express from "express"
 import User from "../../../models/User.js"
+
+import UserRecipeSerializer from "../../../serializers/UserRecipeSerializer.js"
+
 const userRecipesRouter = new express.Router()
 
 userRecipesRouter.get('/', async (req, res) => {
   try {
+    debugger
     const userId = req.user.id
-    const user = User.query().findById(userId)
-    userRecipes = user.$relatedQuery("recipes")
-    res.status(200).json({ recipeData: userRecipes })
+    const user = await User.query().findById(userId)
+    debugger
+    const userRecipes = await user.$relatedQuery("recipes")
+    debugger
+    const serializedRecipes = []
+
+    for (const recipe of userRecipes) {
+      const serializedRecipe = await UserRecipeSerializer.getSummary(recipe)
+      serializedRecipes.push(serializedRecipe)
+    }
+
+    res.status(200).json({ recipeData: serializedRecipes })
   } catch (error) {
     res.status(500).json({ error: error })
   }

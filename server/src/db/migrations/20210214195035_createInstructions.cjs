@@ -8,8 +8,10 @@
 exports.up = async (knex) => {
   return knex.schema.createTable("instructions", table => {
     table.bigIncrements("id")
-    table.string("step")
+    table.text("step")
     table.bigInteger('recipeId').notNullable().index().unsigned().references('recipes.id')
+    table.timestamp("createdAt").defaultTo(knex.fn.now())
+    table.timestamp("updatedAt").defaultTo(knex.fn.now())
   })
 }
 

@@ -16,8 +16,10 @@ exports.up = async (knex) => {
     table.boolean('vegan')
     table.boolean("glutenFree")
     table.boolean("dairyFree")
-    table.string("summary")
+    table.text("summary")
     table.bigInteger("userId").notNullable().unsigned().index().references("users.id")
+    table.timestamp("createdAt").defaultTo(knex.fn.now())
+    table.timestamp("updatedAt").defaultTo(knex.fn.now())
   })
 }
 

@@ -13,7 +13,7 @@ class RecipeIngredient extends Model {
         name: { type: "string" },
         recipeId: { type: ["string", "integer"] },
         amount: { type: ["string", "integer"] },
-        unit: { type: "string" }
+        unit: { type: ["string", "integer"] }
       }
     }
   }

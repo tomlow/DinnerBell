@@ -8,7 +8,7 @@ class Recipe extends Model {
   static get jsonSchema() {
     return {
       type: "object",
-      required: ["name", "userId"],
+      required: ["title", "userId"],
       properties: {
         title: { type: "string" },
         userId: { type: ["string", "integer"] },
