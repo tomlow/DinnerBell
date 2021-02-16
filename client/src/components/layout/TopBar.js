@@ -20,21 +20,31 @@ const TopBar = ({ user }) => {
     </li>,
   ];
 
+  const unauthenticatedNavItems = [
+    <li>
+      DinnerBell
+    </li>
+  ]
+
+  const authenticatedNavItems = [
+    <li>
+      <Link to="/" key="home-button">DinnerBell</Link>
+    </li>,
+    <li>
+      <Link to="/profile" key="profile-button">Profile</Link>
+    </li>,
+    <li>
+      <Link to="/pantry" key="pantry-button">Pantry</Link>
+    </li>
+  ]
+
 
 
   return (
     <div className="top-bar">
       <div className="top-bar-left">
         <ul className="menu">
-          <li>
-            <Link to="/">DinnerBell</Link>
-          </li>
-          <li>
-            <Link to="/profile">Profile</Link>
-          </li>
-          <li>
-            <Link to="/pantry">Pantry</Link>
-          </li>
+          {user ? authenticatedNavItems : unauthenticatedNavItems}
         </ul>
       </div>
       <div className="top-bar-right">

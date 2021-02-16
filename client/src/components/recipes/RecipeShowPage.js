@@ -3,11 +3,11 @@ import React from "react"
 const RecipeShowPage = (props) => {
 
   const recipe = props.location.state.recipe
-  const recipeSteps = recipe.analyzedInstructions[0].steps.map((step, index) => {
-    return <li key={index}>{step.step}</li>
+  const recipeSteps = recipe.instructions.map((instruction, index) => {
+    return <li key={index}>{instruction.step}</li>
   })
   const recipeIngredients = recipe.extendedIngredients.map((ingredient, index) => {
-    return <li key={index}>{ingredient.measures.us.amount} {ingredient.measures.us.unitLong} {ingredient.name}</li>
+    return <li key={index}>{ingredient.amount} {ingredient.unit} {ingredient.name}</li>
   })
 
   return <div>

@@ -16,7 +16,7 @@ const RecipeTile = ({ recipe }) => {
       return truncatedRecipeTitle
     } else return recipeTitle
   }
-  console.log(recipe.id)
+
   const saveRecipe = async (recipePayload) => {
     try {
       const response = await fetch("/api/v1/recipes", {
@@ -27,7 +27,6 @@ const RecipeTile = ({ recipe }) => {
         body: JSON.stringify(recipePayload)
       })
       if (!response.ok) {
-        debugger
         const errorMessage = `${response.status} (${response.statusText})`
         const error = new Error(errorMessage)
         throw error

@@ -6,7 +6,7 @@ const UserProfilePage = (props) => {
 
   const fetchSavedRecipes = async () => {
     try {
-      const response = await fetch(`/api/v1/recipes/userRecipes`)
+      const response = await fetch("/api/v1/userRecipes")
       if (!response.ok) {
         const errorMessage = `${response.status} (${response.statusText})`
         const error = new Error(errorMessage);
