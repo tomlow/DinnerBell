@@ -22,15 +22,17 @@ class RecipeSerializer {
     let serializedRecipe = {}
 
     for (const attribute of allowedAttributes) {
-      serializedRecipe[attribute] = recipe[attribute]
+      if (attribute === "extendedIngredients") {
+        serializedRecipe.ingredients = recipe[attribute]
+      }
+
+      if (attribute === "analyzedInstructions") {
+        serializedRecipe.instructions = recipe[attribute][0].steps
+      }
+
+      else serializedRecipe[attribute] = recipe[attribute]
     }
 
-    for (const ingredient of serializedRecipe.extendedIngredients) {
-
-    }
-
-    // const recipeSummary = await SpoonacularClient.getRecipeSummary(recipe.id)
-    // serializedRecipe.summary = recipeSummary
     return serializedRecipe
   }
 }

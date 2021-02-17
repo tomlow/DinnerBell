@@ -12,7 +12,6 @@ const recipesRouter = new express.Router()
 
 recipesRouter.get("/", async (req, res) => {
   const ingredientList = req.query.ingredientList
-
   // let excludedIngredients;
   // if (req.query.excludedIngredients !== "") {
   //   excludedIngredients = req.query.excludedIngredients.split(", ")
@@ -20,11 +19,14 @@ recipesRouter.get("/", async (req, res) => {
   try {
     const recipeData = await SpoonacularClient.searchRecipeByIngredients(ingredientList)
 
-    const recipesWithInstructions = []
+    const recipesToReturn = []
 
-    for (const recipe of recipeData) {
-      const recipeInformation = await SpoonacularClient.getRecipeInformation(recipe.id)
-      if (recipeInformation.instructions !== null && recipeInformation.analyzedInstructions !== []) {
+    const recipeIds = recipeData.map(recipe => recipe.id).join(",")
+    const recipeDataWithInformation = await SpoonacularClient.getRecipeInformationBulk(recipeIds)
+
+
+    for (const recipe of recipeDataWithInformation) {
+      if (recipe.instructions !== null && recipe.analyzedInstructions !== []) {
         // excludedIngredients.forEach(excludedIngredient => {
 
         //   recipeInformation.extendedIngredients.forEach(ingredient => {
@@ -33,17 +35,17 @@ recipesRouter.get("/", async (req, res) => {
 
         //       return
         //     } else 
-        if (recipesWithInstructions.length < 18) {
+        if (recipesToReturn.length < 18) {
           //fix this logic so you're actually excluding things, and so it won't break if you aren't
-          recipeInformation.missedIngredients = recipe.missedIngredients
-          recipeInformation.usedIngredients = recipe.usedIngredients
-          recipesWithInstructions.push(recipeInformation)
+          recipe.missedIngredients = recipe.missedIngredients
+          recipe.usedIngredients = recipe.usedIngredients
+          recipesToReturn.push(recipe)
         }
         //   })
         // })
       }
     }
-    const serializedRecipeData = recipesWithInstructions.map(recipe => {
+    const serializedRecipeData = recipesToReturn.map(recipe => {
       return RecipeSerializer.getSummary(recipe)
     })
 
@@ -68,7 +70,7 @@ recipesRouter.post("/", async (req, res) => {
 
   const recipeData = req.body
 
-  const { title, summary, image, missedIngredients, usedIngredients, extendedIngredients, analyzedInstructions, glutenFree, dairyFree, vegan, vegetarian, readyInMinutes, servings } = recipeData
+  const { title, summary, image, missedIngredients, usedIngredients, ingredients, instructions, glutenFree, dairyFree, vegan, vegetarian, readyInMinutes, servings } = recipeData
   try {
     const newRecipe = await Recipe.query().insertAndFetch({ title, summary, image, glutenFree, dairyFree, vegan, vegetarian, readyInMinutes, servings, userId })
     const recipeId = newRecipe.id
@@ -84,7 +86,7 @@ recipesRouter.post("/", async (req, res) => {
       await UsedIngredient.query().insert({ name, recipeId })
     }
 
-    for (const ingredient of extendedIngredients) {
+    for (const ingredient of ingredients) {
       const { name, unit, amount } = ingredient
       const integerAmount = amount * 100
 
@@ -92,7 +94,7 @@ recipesRouter.post("/", async (req, res) => {
 
     }
 
-    for (const instruction of analyzedInstructions[0].steps) {
+    for (const instruction of instructions) {
       const { step } = instruction
       await Instruction.query().insert({ step, recipeId })
     }

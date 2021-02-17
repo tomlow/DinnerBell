@@ -7,12 +7,9 @@ const userRecipesRouter = new express.Router()
 
 userRecipesRouter.get('/', async (req, res) => {
   try {
-    debugger
     const userId = req.user.id
     const user = await User.query().findById(userId)
-    debugger
     const userRecipes = await user.$relatedQuery("recipes")
-    debugger
     const serializedRecipes = []
 
     for (const recipe of userRecipes) {

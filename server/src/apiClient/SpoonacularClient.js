@@ -41,6 +41,18 @@ class SpoonacularClient {
       return { error: error.message }
     }
   }
+
+  static async getRecipeInformationBulk(recipeIds) {
+    try {
+      const url = `https://api.spoonacular.com/recipes/informationBulk?ids=${recipeIds}&includeNutrition=false&apiKey=22e2df9ed493453292c7c9a10787439e`;
+      const apiResponse = await got(url);
+      const responseBody = apiResponse.body;
+      const parsedBody = JSON.parse(responseBody)
+      return parsedBody
+    } catch (error) {
+      return { error: error.message }
+    }
+  }
 }
 
 export default SpoonacularClient;
