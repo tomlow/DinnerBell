@@ -42,7 +42,6 @@ const RecipeTile = ({ recipe }) => {
   }
 
   return <div className="card">
-
     <div className="card__body">
       <Link
         id="recipe-show-link" to={{
@@ -61,14 +60,12 @@ const RecipeTile = ({ recipe }) => {
           dangerouslySetInnerHTML={{ __html: truncateRecipeSummary(recipe.summary) }}
         />
       </Link>
-      <div className="card__button-container">
-        <button
-          className="card__btn" onClick={onSaveHandler}>
-          Save Recipe
-          </button>
-      </div>
     </div>
-  </div >
+    <button
+      className="card__btn" onClick={onSaveHandler}>
+      Save Recipe
+    </button>
+  </div>
 }
 
 export default RecipeTile;

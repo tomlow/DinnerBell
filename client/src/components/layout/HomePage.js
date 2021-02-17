@@ -4,12 +4,16 @@ const HomePage = ({ user }) => {
 
   const signUpRoute = "/users/new"
   const pantryRoute = "/pantry"
-  return <div>
-    <div className="text-center headers">
-      <h1>Welcome to DinnerBell</h1>
-      <Link to={user ? pantryRoute : signUpRoute}><h2>let's get cooking</h2></Link>
-    </div>
-  </div>
+  return <div className="cell small-12 text-center">
+    <div className="home-page">
+      <div className="home-page-title">
+        <h1>Welcome to DinnerBell</h1>
+      </div>
+      <div>
+        <Link to={user ? pantryRoute : signUpRoute}><button className="button start-button"><h2>let's get cooking</h2></button></Link>
+      </div>
+    </div >
+  </div >
 }
 
 export default HomePage

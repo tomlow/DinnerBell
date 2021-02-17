@@ -1,6 +1,8 @@
 @import "./foundation/settings";
 @import "~foundation-sites/scss/foundation";
+@import "~antd/dist/antd.css";
 @include foundation-everything;
+
 // place global css here
 *,
 *::before,
@@ -10,6 +12,10 @@
   padding: 0;
 }
 
+::selection {
+  background: rgb(228, 215, 215);
+}
+
 :root {
   -moz-tab-size: 4;
   tab-size: 4;
@@ -17,6 +23,92 @@
   --clr-primary: #d50000;
 
   --radius: 0.2rem;
+}
+
+body {
+  background-image: url("../images/back-splash-2.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+.home-button {
+  font-weight: bolder;
+}
+
+.sign-in-button {
+  align-self: center;
+}
+
+.sign-up-button {
+  align-self: center;
+  margin: 0;
+}
+
+.sign-out-button {
+  align-self: center;
+  margin: 0;
+}
+
+.sign-in-container {
+  background-color: rgba(255, 255, 255, 0.5);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  margin-top: 10rem;
+  width: 75%;
+  margin: auto;
+  align-self: center;
+}
+
+.sign-in-form {
+  align-self: center;
+}
+
+.email-input {
+  width: 50%;
+  margin: auto;
+}
+
+.password-input {
+  width: 50%;
+  margin: auto;
+}
+
+.registration-container {
+  background-color: rgba(255, 255, 255, 0.5);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  margin-top: 10rem;
+  width: 75%;
+  margin: auto;
+  align-self: center;
+}
+
+.home-page {
+  position: absolute;
+  height: auto;
+  width: auto;
+  margin-top: 17%;
+  left: 10%;
+  right: 10%;
+  vertical-align: middle;
+  align-items: center;
+}
+
+.home-page-title {
+  font-family: inherit;
+  font-size: 140px;
+  letter-spacing: 3px;
+  color: var(--clr-primary);
+  text-shadow: 2px 2px rgb(92, 12, 12);
+  text-transform: lowercase;
+  font-style: italic;
+  padding: 0px;
+  line-height: 120px;
+}
+
+.start-button {
+  height: 3.5rem;
+  padding: 1rem;
+  padding-bottom: 4rem;
 }
 
 .tile-container {
@@ -34,6 +126,14 @@
   margin-right: auto;
 }
 
+.spinner-container {
+  display: flex;
+}
+
+.spinner-space {
+  align-self: center;
+}
+
 .card {
   overflow: hidden;
   box-shadow: 0px 2px 20px var(--clr-gray200);
@@ -44,18 +144,12 @@
   cursor: pointer;
   transition: transform 200ms ease-in;
   text-align: center;
+  padding-bottom: 1rem;
 
   &__image {
     height: 12rem;
     width: 100%;
     object-fit: cover;
-  }
-
-  &__content-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    text-align: center;
   }
 
   &__title {
@@ -67,7 +161,8 @@
   }
 
   &__btn-container {
-    align-items: flex-end;
+    display: flex;
+    align-items: space-evenly;
   }
 
   &__btn {
@@ -81,7 +176,6 @@
     color: var(--clr-primary);
     border-radius: var(--radius);
     transition: background 200ms ease-in, color 200ms ease-in;
-    align-items: flex-end;
     cursor: pointer;
   }
   &:hover {

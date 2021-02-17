@@ -7,6 +7,7 @@ const IngredientForm = (props) => {
     name: ""
   })
   const [shouldRedirect, setShouldRedirect] = useState(false)
+  const [errors, setErrors] = useState([])
 
   const postIngredient = async (formPayload) => {
     const response = await fetch('/api/v1/ingredients', {
@@ -29,8 +30,9 @@ const IngredientForm = (props) => {
     }
 
     else {
-      setShouldRedirect(true)
+      setIngredientRecord({ name: "" })
       setErrors([])
+      setShouldRedirect(true)
     }
   }
 
@@ -44,7 +46,6 @@ const IngredientForm = (props) => {
   const onSubmitHandler = (event) => {
     event.preventDefault()
     postIngredient(ingredientRecord)
-    setIngredientRecord({ name: "" })
   }
 
   if (shouldRedirect) {
