@@ -4,30 +4,45 @@ import SignOutButton from "../authentication/SignOutButton";
 
 const TopBar = ({ user }) => {
   const unauthenticatedListItems = [
-    <li key="sign-in">
+    <li key="sign-in" className="sign-in-button">
       <Link to="/user-sessions/new">Sign In</Link>
     </li>,
-    <li key="sign-up">
-      <Link to="/users/new" className="button">
+    <li key="sign-up" className="sign-up-button-container">
+      <Link to="/users/new" className="button sign-up-button">
         Sign Up
       </Link>
     </li>,
   ];
 
   const authenticatedListItems = [
-    <li key="sign-out">
+    <li key="sign-out" className="sign-out-button-container">
       <SignOutButton />
     </li>,
   ];
+
+  const unauthenticatedNavItems = [
+    <li key="unauth-home-button">
+      <Link to="/" key="home-button" className="home-button">DinnerBell</Link>
+    </li>
+  ]
+
+  const authenticatedNavItems = [
+    <li key="auth-home-button">
+      <Link to="/" key="home-button" className="home-button">DinnerBell</Link>
+    </li>,
+    <li key="profile-button">
+      <Link to="/profile" key="profile-button" className="profile-button">Profile</Link>
+    </li>,
+    <li key="pantry-button">
+      <Link to="/pantry" key="pantry-button" className="pantry-button">Pantry</Link>
+    </li>
+  ]
 
   return (
     <div className="top-bar">
       <div className="top-bar-left">
         <ul className="menu">
-          <li className="menu-text">App</li>
-          <li>
-            <Link to="/">Home</Link>
-          </li>
+          {user ? authenticatedNavItems : unauthenticatedNavItems}
         </ul>
       </div>
       <div className="top-bar-right">
