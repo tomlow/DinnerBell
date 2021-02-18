@@ -129,6 +129,10 @@ body {
   padding: 2rem;
 }
 
+.css-g1d714-ValueContainer {
+  height: 50px;
+}
+
 .ingredient-list-container {
   background-color: white;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
@@ -141,16 +145,39 @@ body {
 .ingredient-list {
   display: inline-flex;
   flex-wrap: wrap;
+  justify-content: center;
 }
 
 .ingredient-list-item {
   display: flex;
   justify-content: space-around;
+  margin: auto 30px;
+  margin-bottom: 20px;
+  width: 15vw;
+  min-width: 260px;
 }
 
 .ingredient-left-column {
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-width: 50%;
+}
+
+.ingredient-name {
+  font-size: 20px;
+  text-transform: capitalize;
+}
+
+.ingredient-icons {
+  display: flex;
+  justify-content: space-around;
+}
+
+.ingredient-icon {
+  font-size: 25px;
+  margin: 0 5px;
 }
 
 .tile-container {
