@@ -12,17 +12,18 @@
   padding: 0;
 }
 
-::selection {
-  background: rgb(228, 215, 215);
-}
 
 :root {
   -moz-tab-size: 4;
   tab-size: 4;
   --clr-gray200: #cfd8dc;
   --clr-primary: #d50000;
-
+  --clr-secondary: rgb(228, 215, 215)
   --radius: 0.2rem;
+}
+
+::selection {
+  background: #f86767;;
 }
 
 body {
@@ -34,6 +35,15 @@ body {
 
 .home-button {
   font-weight: bolder;
+  font-size: 18px;
+}
+
+.pantry-button {
+  font-size: 17px;
+}
+
+.profile-button {
+  font-size: 17px;
 }
 
 .sign-in-button {
@@ -51,12 +61,13 @@ body {
 }
 
 .sign-in-container {
-  background-color: rgba(255, 255, 255, 0.5);
+  background-color: rgba(255, 255, 255, 0.8);
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   margin-top: 10rem;
   width: 75%;
   margin: auto;
   align-self: center;
+  padding: 2rem;
 }
 
 .sign-in-form {
@@ -74,12 +85,13 @@ body {
 }
 
 .registration-container {
-  background-color: rgba(255, 255, 255, 0.5);
+  background-color: rgba(255, 255, 255, 0.8);
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   margin-top: 10rem;
   width: 75%;
   margin: auto;
   align-self: center;
+  padding: 2rem;
 }
 
 .home-page {
@@ -112,7 +124,7 @@ body {
 }
 
 .ingredient-form-container {
-  background-color: rgba(255, 255, 255, 0.5);
+  background-color: rgba(255, 255, 255, 0.8);
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   width: 100%;
   margin: auto;
@@ -121,7 +133,7 @@ body {
 }
 
 .recipe-display-container {
-  background-color: rgba(255, 255, 255, 0.5);
+  background-color: rgba(255, 255, 255, 0.8);
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   width: 100%;
   margin: auto;
@@ -131,6 +143,10 @@ body {
 
 .css-g1d714-ValueContainer {
   height: 50px;
+}
+
+.ingredient-form-label {
+  font-size: 30px;
 }
 
 .ingredient-list-container {
@@ -199,7 +215,7 @@ body {
 }
 
 .show-container {
-  background-color: rgba(255, 255, 255, 0.5);
+  background-color: rgba(255, 255, 255, 0.8);
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   width: 75%;
   margin: auto auto 2rem;
@@ -220,7 +236,7 @@ body {
 }
 
 .profile-container {
-  background-color: rgba(255, 255, 255, 0.5);
+  background-color: rgba(255, 255, 255, 0.8);
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   width: 90%;
   margin: auto;

@@ -21,19 +21,19 @@ const TopBar = ({ user }) => {
   ];
 
   const unauthenticatedNavItems = [
-    <li>
+    <li key="unauth-home-button">
       <Link to="/" key="home-button" className="home-button">DinnerBell</Link>
     </li>
   ]
 
   const authenticatedNavItems = [
-    <li>
+    <li key="auth-home-button">
       <Link to="/" key="home-button" className="home-button">DinnerBell</Link>
     </li>,
-    <li>
+    <li key="profile-button">
       <Link to="/profile" key="profile-button" className="profile-button">Profile</Link>
     </li>,
-    <li>
+    <li key="pantry-button">
       <Link to="/pantry" key="pantry-button" className="pantry-button">Pantry</Link>
     </li>
   ]

@@ -88,7 +88,7 @@ const RegistrationForm = () => {
     <div className="registration-container text-center" onSubmit={onSubmit}>
       <h1>Register</h1>
       <div className="registration-form">
-        <form>
+        <form autoComplete="off">
           <div>
             <label>
               Email

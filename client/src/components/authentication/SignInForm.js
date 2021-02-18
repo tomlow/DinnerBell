@@ -81,7 +81,7 @@ const SignInForm = () => {
   return (
     <div className="sign-in-container text-center" onSubmit={onSubmit}>
       <h1>Sign In</h1>
-      <form className="sign-in-form">
+      <form className="sign-in-form" autoComplete="off">
         <div>
           <label>Email
              <input type="text"

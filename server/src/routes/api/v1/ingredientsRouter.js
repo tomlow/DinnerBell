@@ -1,6 +1,8 @@
 import express from "express"
 import cleanUserInput from "../../../services/cleanUserInput.js"
 import Ingredient from "../../../models/Ingredient.js"
+import objection from "objection"
+const { ValidationError } = objection
 
 import SpoonacularClient from "../../../apiClient/SpoonacularClient.js"
 

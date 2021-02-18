@@ -18,6 +18,7 @@ class UserRecipeSerializer {
     for (const attribute of allowedAttributes) {
       serializedRecipe[attribute] = recipe[attribute]
     }
+
     serializedRecipe.missedIngredients = await recipe.$relatedQuery("missedIngredients")
     serializedRecipe.usedIngredients = await recipe.$relatedQuery("usedIngredients")
     serializedRecipe.extendedIngredients = await recipe.$relatedQuery("recipeIngredients")
@@ -25,6 +26,7 @@ class UserRecipeSerializer {
       ingredient.amount = ingredient.amount / 100
     }
     serializedRecipe.instructions = await recipe.$relatedQuery("instructions")
+    debugger
     return serializedRecipe
   }
 }

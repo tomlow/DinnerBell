@@ -12,39 +12,28 @@ const recipesRouter = new express.Router()
 
 recipesRouter.get("/", async (req, res) => {
   const ingredientList = req.query.ingredientList
-  // let excludedIngredients;
-  // if (req.query.excludedIngredients !== "") {
-  //   excludedIngredients = req.query.excludedIngredients.split(", ")
-  // }
+
   try {
     const recipeData = await SpoonacularClient.searchRecipeByIngredients(ingredientList)
 
     const recipesToReturn = []
-
     const recipeIds = recipeData.map(recipe => recipe.id).join(",")
     const recipeDataWithInformation = await SpoonacularClient.getRecipeInformationBulk(recipeIds)
 
+    recipeDataWithInformation.forEach(recipeWithInformation => {
+      recipeWithInformation.missedIngredients = recipeData[recipeDataWithInformation.indexOf(recipeWithInformation)].missedIngredients
+      recipeWithInformation.usedIngredients = recipeData[recipeDataWithInformation.indexOf(recipeWithInformation)].usedIngredients
+    })
 
     for (const recipe of recipeDataWithInformation) {
       if (recipe.instructions !== null && recipe.analyzedInstructions !== []) {
-        // excludedIngredients.forEach(excludedIngredient => {
-
-        //   recipeInformation.extendedIngredients.forEach(ingredient => {
-
-        //     if (ingredient.name === excludedIngredient.name) {
-
-        //       return
-        //     } else 
+        debugger
         if (recipesToReturn.length < 18) {
-          //fix this logic so you're actually excluding things, and so it won't break if you aren't
-          recipe.missedIngredients = recipe.missedIngredients
-          recipe.usedIngredients = recipe.usedIngredients
           recipesToReturn.push(recipe)
         }
-        //   })
-        // })
       }
     }
+
     const serializedRecipeData = recipesToReturn.map(recipe => {
       return RecipeSerializer.getSummary(recipe)
     })
@@ -56,23 +45,14 @@ recipesRouter.get("/", async (req, res) => {
   }
 })
 
-recipesRouter.get("/recipeById", async (req, res) => {
-  const recipeId = req.query.recipeId
-  try {
-    const recipeInformation = await SpoonacularClient.getRecipeInformation(recipeId)
-  } catch (error) {
-    res.status(500).json({ error: error })
-  }
-})
-
 recipesRouter.post("/", async (req, res) => {
   const userId = req.user.id
-
   const recipeData = req.body
-
   const { title, summary, image, missedIngredients, usedIngredients, ingredients, instructions, glutenFree, dairyFree, vegan, vegetarian, readyInMinutes, servings } = recipeData
+
   try {
     const newRecipe = await Recipe.query().insertAndFetch({ title, summary, image, glutenFree, dairyFree, vegan, vegetarian, readyInMinutes, servings, userId })
+
     const recipeId = newRecipe.id
     if (missedIngredients.length > 0) {
       for (const missedIngredient of missedIngredients) {
@@ -89,15 +69,14 @@ recipesRouter.post("/", async (req, res) => {
     for (const ingredient of ingredients) {
       const { name, unit, amount } = ingredient
       const integerAmount = amount * 100
-
       await RecipeIngredient.query().insert({ name, unit, amount: integerAmount, recipeId })
-
     }
 
     for (const instruction of instructions) {
       const { step } = instruction
       await Instruction.query().insert({ step, recipeId })
     }
+
     res.status(201).json()
   } catch (error) {
     res.status(500).json({ error: error })
@@ -106,6 +85,7 @@ recipesRouter.post("/", async (req, res) => {
 
 recipesRouter.delete("/", async (req, res) => {
   const { id } = req.body
+
   try {
     await Recipe.query().findById(id).delete()
     return res.status(201).json()

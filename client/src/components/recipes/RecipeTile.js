@@ -19,7 +19,8 @@ const RecipeTile = ({ recipe }) => {
 
   const saveRecipe = async (recipePayload) => {
     try {
-      const response = await fetch("/api/v1/recipes", {
+      debugger
+      const response = await fetch('/api/v1/recipes/', {
         method: "POST",
         headers: new Headers({
           "Content-Type": "application/json"
@@ -27,17 +28,21 @@ const RecipeTile = ({ recipe }) => {
         body: JSON.stringify(recipePayload)
       })
       if (!response.ok) {
+        debugger
         const errorMessage = `${response.status} (${response.statusText})`
         const error = new Error(errorMessage)
         throw error
       }
+      debugger
       alert("Recipe saved!")
     } catch (error) {
+      debugger
       console.error(`Error in fetch: ${error.message}`)
     }
   }
 
   const onSaveHandler = () => {
+    debugger
     saveRecipe(recipe)
   }
 

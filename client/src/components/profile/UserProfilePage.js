@@ -14,6 +14,7 @@ const UserProfilePage = (props) => {
       }
       const responseBody = await response.json()
       const recipeData = responseBody.recipeData
+      debugger
       setRecipes(recipeData)
     } catch (error) {
       console.error(`Error in fetch: ${error.message}`);

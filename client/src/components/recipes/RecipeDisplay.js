@@ -12,7 +12,7 @@ const RecipeDisplay = ({ queryByIngredients, recipes }) => {
     })}</div>
   }
 
-  return <div className="recipe-display-container">
+  return <div className="recipe-display-container text-center">
     <div>
       <button className="button" onClick={queryByIngredients}>What's for Dinner?</button>
     </div>
