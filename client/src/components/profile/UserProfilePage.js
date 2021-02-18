@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react"
-import RecipeTile from "../recipes/RecipeTile.js"
+import SavedRecipeTile from "./SavedRecipeTile.js"
 const UserProfilePage = (props) => {
 
   const [recipes, setRecipes] = useState([])
@@ -24,11 +24,16 @@ const UserProfilePage = (props) => {
     fetchSavedRecipes()
   }, [])
 
-  const recipeDisplay = recipes.map((recipe, index) => {
-    return <RecipeTile key={index} recipe={recipe} />
-  })
+  let recipeDisplay;
 
-  return <div>
+  if (!_.isEmpty(recipes)) {
+    recipeDisplay = <div className="tile-container"> {recipes.map((recipe, index) => {
+      return <SavedRecipeTile key={index} recipe={recipe} />
+    })}</div>
+  }
+
+  return <div className="profile-container text-center">
+    <h1>Choose an old favorite</h1>
     {recipeDisplay}
   </div>
 }

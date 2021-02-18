@@ -38,8 +38,6 @@ const TopBar = ({ user }) => {
     </li>
   ]
 
-
-
   return (
     <div className="top-bar">
       <div className="top-bar-left">

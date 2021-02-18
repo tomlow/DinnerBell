@@ -111,6 +111,48 @@ body {
   padding-bottom: 4rem;
 }
 
+.ingredient-form-container {
+  background-color: rgba(255, 255, 255, 0.5);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  width: 100%;
+  margin: auto;
+  align-self: center;
+  padding: 2rem;
+}
+
+.recipe-display-container {
+  background-color: rgba(255, 255, 255, 0.5);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  width: 100%;
+  margin: auto;
+  align-self: center;
+  padding: 2rem;
+}
+
+.ingredient-list-container {
+  background-color: white;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  width: 100%;
+  margin: auto;
+  align-self: center;
+  padding: 2rem;
+}
+
+.ingredient-list {
+  display: inline-flex;
+  flex-wrap: wrap;
+}
+
+.ingredient-list-item {
+  display: flex;
+  justify-content: space-around;
+}
+
+.ingredient-left-column {
+  display: flex;
+  flex-direction: column;
+}
+
 .tile-container {
   font-family: "Merriweather", "Muli";
   margin: 2rem;
@@ -121,9 +163,25 @@ body {
 }
 
 .grid-container {
+  font-family: "Merriweather", "Muli";
   max-width: 75rem;
   margin-left: auto;
   margin-right: auto;
+  margin-top: 6rem;
+  margin-bottom: 2rem;
+}
+
+.show-container {
+  background-color: rgba(255, 255, 255, 0.5);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  width: 75%;
+  margin: auto auto 2rem;
+  align-self: center;
+}
+
+.show-image {
+  max-width: 100%;
+  height: auto;
 }
 
 .spinner-container {
@@ -131,6 +189,14 @@ body {
 }
 
 .spinner-space {
+  align-self: center;
+}
+
+.profile-container {
+  background-color: rgba(255, 255, 255, 0.5);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  width: 90%;
+  margin: auto;
   align-self: center;
 }
 
@@ -197,6 +263,13 @@ input {
 h1 {
   font-family: "Merriweather", Serif;
   font-size: 46px;
+}
+
+.top-bar {
+  top: 0px;
+  position: fixed;
+  width: 100%;
+  margin-bottom: 2rem;
 }
 
 #recipe-show-link {

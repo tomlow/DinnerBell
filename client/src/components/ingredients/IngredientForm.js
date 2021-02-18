@@ -1,7 +1,36 @@
 import React, { useState } from "react"
 import { Redirect } from "react-router-dom"
+import AsyncSelect from 'react-select/async';
 
 const IngredientForm = (props) => {
+
+  // const SelectAsync = () => {
+  //   const [inputValue, setInputValue] = useState('');
+  //   const [selectedValue, setSelectedValue] = useState(null);
+  //   const handleInputChange = value => {
+  //     setInputValue(value)
+  //   };
+  //   const handleChange = value => {
+  //     setSelectedValue(value)
+  //   }
+  //   const loadOptions = (inputValue) => {
+  //     return fetch(`/api/v1/ingredients/?query=${inputValue}`).then(res => res.json())
+  //   };
+  //   return (
+  //     <div>
+  //       <AsyncSelect
+  //         value={selectedValue}
+  //         getOptionLabel={e => e.name}
+  //         getOptionValue={e => e.id}
+  //         loadOptions={loadOptions}
+  //         onInputChange={handleInputChange}
+  //         onChange={handleChange}
+  //       />
+  //       <pre>Selected Value: {JSON.stringify(selectedValue || {}, null, 2)}</pre> (this just shows your returned data for testing)
+  //     </div>
+  //   );
+  // }
+  // export default SelectAsync;
 
   const [ingredientRecord, setIngredientRecord] = useState({
     name: ""

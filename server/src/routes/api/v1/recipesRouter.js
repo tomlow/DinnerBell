@@ -104,4 +104,14 @@ recipesRouter.post("/", async (req, res) => {
   }
 })
 
+recipesRouter.delete("/", async (req, res) => {
+  const { id } = req.body
+  try {
+    await Recipe.query().findById(id).delete()
+    return res.status(201).json()
+  } catch (error) {
+    return res.status(500).json({ error: error })
+  }
+})
+
 export default recipesRouter

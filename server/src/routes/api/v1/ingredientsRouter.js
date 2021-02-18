@@ -1,6 +1,9 @@
 import express from "express"
 import cleanUserInput from "../../../services/cleanUserInput.js"
 import Ingredient from "../../../models/Ingredient.js"
+
+import SpoonacularClient from "../../../apiClient/SpoonacularClient.js"
+
 const ingredientsRouter = new express.Router()
 
 ingredientsRouter.get('/', async (req, res) => {
@@ -25,12 +28,12 @@ ingredientsRouter.get('/', async (req, res) => {
   }
 })
 
-ingredientsRouter.get('/:ingredientId', async (req, res) => {
-  try {
-    const ingredientId = req.params.ingredientId
-    const ingredient = await Ingredient.query().findById(ingredientId)
+ingredientsRouter.get('/autocomplete', async (req, res) => {
+  const queryString = req.params.query
 
-    res.status(200).json({ ingredient: ingredient })
+  try {
+    const autoCompleteResults = SpoonacularClient.autoCompleteByString(queryString)
+    res.status(200).json({ autoCompleteResults })
   } catch (error) {
     res.status(500).json({ error: error })
   }
