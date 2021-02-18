@@ -4,7 +4,7 @@ import IngredientListItem from "./IngredientListItem.js"
 
 import IngredientForm from "./IngredientForm"
 
-const IngredientsList = ({ inventory }) => {
+const IngredientsList = ({ inventory, setInventory }) => {
 
   const [errors, setErrors] = useState([])
 
@@ -28,7 +28,10 @@ const IngredientsList = ({ inventory }) => {
       }
     }
     else {
+      const responseBody = response.json()
+      const newIngredient = responseBody.newIngredient
       setErrors([])
+      setInventory([...inventory, newIngredient])
     }
   }
 

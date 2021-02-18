@@ -55,7 +55,7 @@ const Pantry = (props) => {
   }
 
   return <div>
-    <IngredientsList inventory={inventory} />
+    <IngredientsList inventory={inventory} setInventory={setInventory} />
     <RecipeDisplay queryByIngredients={queryByIngredients} recipes={recipes} />
   </div>
 }
