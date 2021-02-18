@@ -28,7 +28,7 @@ const IngredientsList = ({ inventory, setInventory }) => {
       }
     }
     else {
-      const responseBody = response.json()
+      const responseBody = await response.json()
       const newIngredient = responseBody.newIngredient
       setErrors([])
       setInventory([...inventory, newIngredient])
