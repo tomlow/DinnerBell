@@ -29,11 +29,14 @@ ingredientsRouter.get('/', async (req, res) => {
 })
 
 ingredientsRouter.get('/autocomplete', async (req, res) => {
-  const queryString = req.params.query
-
+  // debugger
+  const queryString = req.query
+  // debugger
   try {
-    const autoCompleteResults = SpoonacularClient.autoCompleteByString(queryString)
-    res.status(200).json({ autoCompleteResults })
+    // debugger
+    const autoCompleteResults = await SpoonacularClient.autoCompleteByString(queryString.query)
+    // debugger
+    res.status(200).json(autoCompleteResults)
   } catch (error) {
     res.status(500).json({ error: error })
   }
@@ -43,9 +46,9 @@ ingredientsRouter.post("/", async (req, res) => {
   try {
     const { body } = req
     const formInput = cleanUserInput(body)
-    const { name } = formInput
+    const { name, image } = formInput
     const userId = req.user.id
-    const newIngredient = await Ingredient.query().insertAndFetch({ name, userId })
+    const newIngredient = await Ingredient.query().insertAndFetch({ name, image, userId })
     return res.status(201).json({ ingredient: newIngredient })
   } catch (error) {
     if (error instanceof ValidationError) {

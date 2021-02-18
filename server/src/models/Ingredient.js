@@ -11,6 +11,7 @@ class Ingredient extends Model {
       required: ["name", "userId"],
       properties: {
         name: { type: "string" },
+        image: { type: "string" },
         userId: { type: ["string", "integer"] }
       }
     }
