@@ -56,13 +56,10 @@ class SpoonacularClient {
 
   static async autoCompleteByString(queryString) {
     try {
-      // debugger
       const url = `https://api.spoonacular.com/food/ingredients/autocomplete?query=${queryString}&number=10&apiKey=${spoonacularApiKey}`
       const apiResponse = await got(url);
       const responseBody = apiResponse.body;
-      // debugger
       const parsedBody = JSON.parse(responseBody)
-      // debugger
       return parsedBody
     } catch (error) {
       return { error: error.message }
