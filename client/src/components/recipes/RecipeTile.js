@@ -1,7 +1,11 @@
 import React, { useState } from "react"
 import { Link } from "react-router-dom"
 
-const RecipeTile = ({ recipe }) => {
+const RecipeTile = ({ recipe, handleClick }) => {
+
+
+
+
   const recipeId = recipe.id
   const truncateRecipeSummary = (recipeSummary) => {
     if (recipeSummary.length > 100) {
@@ -10,6 +14,7 @@ const RecipeTile = ({ recipe }) => {
     }
     else return recipeSummary
   }
+
   const truncateRecipeTitle = (recipeTitle) => {
     if (recipeTitle.length > 25) {
       const truncatedRecipeTitle = recipe.title.substr(0, 25) + "..."
@@ -19,7 +24,6 @@ const RecipeTile = ({ recipe }) => {
 
   const saveRecipe = async (recipePayload) => {
     try {
-      debugger
       const response = await fetch('/api/v1/recipes', {
         method: "POST",
         headers: new Headers({
@@ -28,21 +32,17 @@ const RecipeTile = ({ recipe }) => {
         body: JSON.stringify(recipePayload)
       })
       if (!response.ok) {
-        debugger
         const errorMessage = `${response.status} (${response.statusText})`
         const error = new Error(errorMessage)
         throw error
       }
-      debugger
-      alert("Recipe saved!")
+      handleClick()
     } catch (error) {
-      debugger
       console.error(`Error in fetch: ${error.message}`)
     }
   }
 
   const onSaveHandler = () => {
-    debugger
     saveRecipe(recipe)
   }
 
@@ -66,10 +66,12 @@ const RecipeTile = ({ recipe }) => {
         />
       </Link>
     </div>
-    <button
-      className="card__btn" onClick={onSaveHandler}>
-      Save Recipe
+    <div className="save-button-snackbar">
+      <button
+        className="card__btn" onClick={onSaveHandler}>
+        Save Recipe
     </button>
+    </div>
   </div>
 }
 
