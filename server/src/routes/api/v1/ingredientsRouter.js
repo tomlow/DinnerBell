@@ -18,16 +18,6 @@ ingredientsRouter.get('/', async (req, res) => {
   }
 })
 
-ingredientsRouter.get("/:id", async (req, res) => {
-  const { id } = req.params
-  try {
-    const ingredient = await Ingredient.query().findById(id)
-    res.status(200).json({ ingredient: ingredient })
-  } catch (error) {
-    res.status(500).json({ error: error })
-  }
-})
-
 ingredientsRouter.get('/autocomplete', async (req, res) => {
   const queryString = req.query
   try {
@@ -38,6 +28,17 @@ ingredientsRouter.get('/autocomplete', async (req, res) => {
     res.status(500).json({ error: error })
   }
 })
+
+ingredientsRouter.get("/:id", async (req, res) => {
+  const { id } = req.params
+  try {
+    const ingredient = await Ingredient.query().findById(id)
+    res.status(200).json({ ingredient: ingredient })
+  } catch (error) {
+    res.status(500).json({ error: error })
+  }
+})
+
 
 ingredientsRouter.post("/", async (req, res) => {
   try {
