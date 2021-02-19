@@ -7,7 +7,6 @@ import SavedRecipeTile from "./SavedRecipeTile.js"
 const UserProfilePage = (props) => {
 
   const [recipes, setRecipes] = useState([])
-  const [defaultDisplay, setDefaultDisplay] = useState(true)
 
   let recipeDisplay;
   let profileDisplay;
@@ -33,18 +32,14 @@ const UserProfilePage = (props) => {
   }, [])
 
 
-  if (!_.isEmpty(recipes) && defaultDisplay === true) {
-    setDefaultDisplay(false)
-  }
-
-  if (defaultDisplay) {
+  if (_.isEmpty(recipes)) {
     profileDisplay = <div className="profile-container text-center">
       <h2>No recipes yet! Go check some out in the <Link to="/pantry">pantry</Link></h2>
     </div>
     return profileDisplay
   }
 
-  if (!defaultDisplay) {
+  if (!_.isEmpty(recipes)) {
     recipeDisplay = <div className="tile-container"> {recipes.map((recipe, index) => {
       return <SavedRecipeTile key={index} recipe={recipe} />
     })}</div>
