@@ -31,13 +31,9 @@ ingredientsRouter.get('/', async (req, res) => {
 })
 
 ingredientsRouter.get('/autocomplete', async (req, res) => {
-  // debugger
   const queryString = req.query
-  // debugger
   try {
-    // debugger
     const autoCompleteResults = await SpoonacularClient.autoCompleteByString(queryString.query)
-    // debugger
     res.status(200).json(autoCompleteResults)
   } catch (error) {
     res.status(500).json({ error: error })
@@ -82,7 +78,8 @@ ingredientsRouter.delete("/:ingredientId", async (req, res) => {
   try {
     const { ingredientId } = req.params
     await Ingredient.query().findById(ingredientId).delete()
-    return res.status(201).json()
+    const remainingIngredients = await Ingredient.query()
+    return res.status(201).json({ remainingIngredients: remainingIngredients })
   } catch (error) {
     if (error instanceof ValidationError) {
       return res.status(422).json({ errors: error.data })

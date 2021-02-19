@@ -26,25 +26,9 @@ const IngredientDeleteForm = (props) => {
     fetchIngredient()
   }, [])
 
-  const deleteIngredient = async (ingredientPayload) => {
-    try {
-      const response = await fetch(`/api/v1/ingredients/${ingredientId}`, {
-        method: "DELETE",
-        headers: new Headers({
-          "Content-Type": "application/json",
-        }),
-        body: JSON.stringify(ingredientPayload),
-      })
-      setShouldRedirect(true)
-    } catch (error) {
-      console.error(`Error in fetch: ${error.message}`)
-    }
-  }
 
-  const onSubmitHandler = (event) => {
-    event.preventDefault()
-    deleteIngredient(ingredientRecord)
-  }
+
+
 
   const returnToPantry = (event) => {
     event.preventDefault()

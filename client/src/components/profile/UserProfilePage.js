@@ -41,10 +41,9 @@ const UserProfilePage = (props) => {
         const error = new Error(errorMessage)
         throw error
       }
-      debugger
       const responseBody = await response.json()
-      debugger
-      setRecipes(responseBody.updatedRecipes)
+      const remainingRecipes = responseBody.remainingRecipes
+      setRecipes(remainingRecipes)
       alert("Recipe removed!")
     } catch (error) {
       console.error(`Error in fetch: ${error.message}`)

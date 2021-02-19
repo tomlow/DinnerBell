@@ -12,18 +12,18 @@
   padding: 0;
 }
 
-
 :root {
   -moz-tab-size: 4;
   tab-size: 4;
   --clr-gray200: #cfd8dc;
   --clr-primary: #d50000;
-  --clr-secondary: rgb(228, 215, 215)
+  --clr-secondary: rgb(228, 215, 215);
+  --clr-tertiary: #f86767;
   --radius: 0.2rem;
 }
 
 ::selection {
-  background: #f86767;;
+  background: #f86767;
 }
 
 body {
@@ -40,6 +40,18 @@ body {
 
 .pantry-button {
   font-size: 17px;
+}
+
+.ant-btn {
+  border-color: var(--clr-tertiary);
+}
+
+.ant-btn:hover {
+  background-color: var(--clr-tertiary);
+}
+
+.ant-btn-primary {
+  background-color: var(--clr-tertiary);
 }
 
 .profile-button {
@@ -206,6 +218,7 @@ body {
 .ingredient-icon {
   font-size: 25px;
   margin: 0 5px;
+  color: var(--clr-primary);
 }
 
 .tile-container {
