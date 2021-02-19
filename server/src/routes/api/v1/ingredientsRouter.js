@@ -12,19 +12,17 @@ ingredientsRouter.get('/', async (req, res) => {
   const user = req.user
   try {
     let userIngredients = await user.$relatedQuery("ingredients")
-
-    // const userAmountsAndIngredients = []
-
-    // for (const amount of userAmounts) {
-    //   const ingredient = await amount.$relatedQuery('ingredient')
-    //   let { unit, quantity, id } = amount
-    //   let amountAndIngredient = { unit, quantity, amountId: id }
-    //   amountAndIngredient.ingredientName = ingredient.name
-    //   amountAndIngredient.ingredientId = ingredient.id
-    //   userAmountsAndIngredients.push(amountAndIngredient)
-    // }
     res.status(200).json({ ingredients: userIngredients })
+  } catch (error) {
+    res.status(500).json({ error: error })
+  }
+})
 
+ingredientsRouter.get("/:id", async (req, res) => {
+  const { id } = req.params
+  try {
+    const ingredient = await Ingredient.query().findById(id)
+    res.status(200).json({ ingredient: ingredient })
   } catch (error) {
     res.status(500).json({ error: error })
   }
@@ -33,6 +31,7 @@ ingredientsRouter.get('/', async (req, res) => {
 ingredientsRouter.get('/autocomplete', async (req, res) => {
   const queryString = req.query
   try {
+    debugger
     const autoCompleteResults = await SpoonacularClient.autoCompleteByString(queryString.query)
     res.status(200).json(autoCompleteResults)
   } catch (error) {
@@ -56,14 +55,13 @@ ingredientsRouter.post("/", async (req, res) => {
   }
 })
 
-ingredientsRouter.patch("/:id", async (req, res) => {
+ingredientsRouter.patch("/", async (req, res) => {
   try {
     const { body } = req
     const formInput = cleanUserInput(body)
-    const { name } = formInput
-    const { id } = req.params
+    const { name, image } = formInput
 
-    await Ingredient.query().findById(id).patch({ name: name })
+    await Ingredient.query().findOne({ name: name }).patch({ name: name, image: image })
 
     return res.status(201).json()
   } catch (error) {

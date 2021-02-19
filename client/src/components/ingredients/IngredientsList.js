@@ -1,11 +1,8 @@
 import React, { useState, useEffect } from "react"
-
 import IngredientListItem from "./IngredientListItem.js"
-
 import IngredientForm from "./IngredientForm"
 
 const IngredientsList = ({ inventory, setInventory }) => {
-
   const [errors, setErrors] = useState([])
 
   const postIngredient = async (formPayload) => {

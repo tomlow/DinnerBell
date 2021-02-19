@@ -12,7 +12,6 @@ import TopBar from "./layout/TopBar";
 import AuthenticatedRoute from "./authentication/AuthenticatedRoute.js"
 import Pantry from "./Pantry.js"
 import IngredientEditForm from "./ingredients/IngredientEditForm.js"
-import IngredientDeleteForm from "./ingredients/IngredientDeleteForm.js"
 import RecipeShowPage from "./recipes/RecipeShowPage.js"
 import UserProfilePage from "./profile/UserProfilePage.js"
 import HomePage from "./layout/HomePage.js"
@@ -40,7 +39,6 @@ const App = (props) => {
           <Route exact path="/user-sessions/new" component={SignInForm} />
           <AuthenticatedRoute exact path="/pantry" component={Pantry} />
           <Route exact path="/ingredients/edit/:id" component={IngredientEditForm} />
-          <Route exact path="/ingredients/delete/:id" component={IngredientDeleteForm} />
           <Route exact path="/recipes/:id" component={RecipeShowPage} />
           <Route exact path="/profile" component={UserProfilePage} />
         </Switch>

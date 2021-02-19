@@ -1,16 +1,37 @@
 import React, { useState, useEffect } from "react"
 import { Redirect } from "react-router-dom"
-import ErrorList from "../errorHandlers/ErrorList.js"
 import translateServerErrors from "../../services/translateServerErrors.js"
+import AsyncSelect from 'react-select/async';
 
 const IngredientEditForm = (props) => {
-  const [ingredientRecord, setIngredientRecord] = useState({
-    name: "",
-  })
-  const [errors, setErrors] = useState([])
   const [shouldRedirect, setShouldRedirect] = useState(false)
-
   const { id: ingredientId } = props.match.params
+  const [inputValue, setInputValue] = useState('');
+  const [selectedValue, setSelectedValue] = useState({
+    name: "",
+    image: ""
+  });
+  const [errors, setErrors] = useState([])
+
+  const handleInputChange = value => {
+    setInputValue(value)
+  };
+
+  const handleChange = value => {
+    setSelectedValue(value)
+  }
+  const loadOptions = (inputValue) => {
+    return fetch(`/api/v1/ingredients/autocomplete?query=${inputValue}`).then(res => res.json())
+  };
+
+  const onSubmitHandler = (event) => {
+    event.preventDefault()
+    editIngredient(selectedValue)
+    setSelectedValue({
+      name: "",
+      image: ""
+    })
+  }
 
   const fetchIngredient = async () => {
     try {
@@ -20,15 +41,19 @@ const IngredientEditForm = (props) => {
       }
       const body = await response.json()
       const ingredient = body.ingredient
-      setIngredientRecord(ingredient)
+      setSelectedValue(ingredient)
     } catch (error) {
       console.error(error.message)
     }
   }
 
+  useEffect(() => {
+    fetchIngredient()
+  }, [])
+
   const editIngredient = async (ingredientPayload) => {
     try {
-      const response = await fetch(`/api/v1/ingredients/${ingredientId}`, {
+      const response = await fetch(`/api/v1/ingredients/`, {
         method: "PATCH",
         headers: new Headers({
           "Content-Type": "application/json",
@@ -46,7 +71,6 @@ const IngredientEditForm = (props) => {
           throw error
         }
       } else {
-        setErrors([])
         setShouldRedirect(true)
       }
     } catch (error) {
@@ -54,60 +78,27 @@ const IngredientEditForm = (props) => {
     }
   }
 
-  useEffect(() => {
-    fetchIngredient()
-  }, [])
-
-  const handleInputChange = (event) => {
-    setIngredientRecord({
-      ...ingredientRecord,
-      [event.currentTarget.name]: event.currentTarget.value,
-    })
-  }
-
-  const fieldReset = () => {
-    setIngredientRecord({
-      name: "",
-    })
-  }
-
-  const onSubmitHandler = (event) => {
-    event.preventDefault()
-    editIngredient(ingredientRecord)
-    fieldReset()
-  }
-
-  const clearForm = (event) => {
-    event.preventDefault()
-    fieldReset()
-  }
-
   if (shouldRedirect) {
     return <Redirect to="/pantry" />
   }
 
   return (
-    <div>
-      <h1>Edit Ingredient</h1>
-      <ErrorList errors={errors} />
-      <form className="callout" onSubmit={onSubmitHandler}>
-        <label htmlFor="name">
-          Ingredient:
-        </label>
-        <input type="text"
-          id="name"
-          name="name"
-          onChange={handleInputChange}
-          value={ingredientRecord.name}
-        />
-        <div className="button-group">
-          <button className="button" onClick={clearForm}>
-            Clear
-          </button>
-          <input className="success button" type="submit" value="Submit" />
+    <div className="edit-form-container text-center">
+      <form onSubmit={onSubmitHandler}>
+        <label className="ingredient-form-label">Try entering your ingredient again</label >
+        <div>
+          <AsyncSelect
+            value={selectedValue}
+            getOptionLabel={e => e.name}
+            getOptionValue={e => e.name}
+            loadOptions={loadOptions}
+            onInputChange={handleInputChange}
+            onChange={handleChange}
+          />
         </div>
-      </form>
-    </div>
+        <input className="button" type="submit" value="Restock the Shelf" onSubmit={onSubmitHandler} />
+      </form >
+    </div >
   )
 }
 

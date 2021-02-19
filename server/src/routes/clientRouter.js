@@ -11,7 +11,6 @@ const clientRoutes = [
   "/recipes/userRecipes",
   "/recipes/:id",
   "/ingredients/edit/:id",
-  "/ingredients/delete/:id",
   "/profile",
 ];
 router.get(clientRoutes, (req, res) => {
