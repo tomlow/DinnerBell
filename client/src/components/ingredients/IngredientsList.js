@@ -35,8 +35,25 @@ const IngredientsList = ({ inventory, setInventory }) => {
     }
   }
 
+  const deleteIngredient = async (ingredientPayload) => {
+    try {
+      const response = await fetch(`/api/v1/ingredients/${ingredientPayload.id}`, {
+        method: "DELETE",
+        headers: new Headers({
+          "Content-Type": "application/json",
+        }),
+        body: JSON.stringify(ingredientPayload),
+      })
+      const responseBody = await response.json()
+      const remainingIngredients = responseBody.remainingIngredients
+      setInventory(remainingIngredients)
+    } catch (error) {
+      console.error(`Error in fetch: ${error.message}`)
+    }
+  }
+
   const inventoryList = inventory.map((ingredient, index) => {
-    return <IngredientListItem key={index} ingredient={ingredient} />
+    return <IngredientListItem key={index} ingredient={ingredient} deleteIngredient={deleteIngredient} />
   })
 
   return <div>

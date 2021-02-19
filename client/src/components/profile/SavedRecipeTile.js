@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 import { Link } from "react-router-dom"
 
-const SavedRecipeTile = ({ recipe }) => {
+const SavedRecipeTile = ({ recipe, removeRecipe }) => {
   const recipeId = recipe.id
   const truncateRecipeSummary = (recipeSummary) => {
     if (recipeSummary.length > 100) {
@@ -15,26 +15,6 @@ const SavedRecipeTile = ({ recipe }) => {
       const truncatedRecipeTitle = recipe.title.substr(0, 25) + "..."
       return truncatedRecipeTitle
     } else return recipeTitle
-  }
-
-  const removeRecipe = async (recipePayload) => {
-    try {
-      const response = await fetch("/api/v1/recipes", {
-        method: "DELETE",
-        headers: new Headers({
-          "Content-Type": "application/json"
-        }),
-        body: JSON.stringify(recipePayload)
-      })
-      if (!response.ok) {
-        const errorMessage = `${response.status} (${response.statusText})`
-        const error = new Error(errorMessage)
-        throw error
-      }
-      alert("Recipe removed!")
-    } catch (error) {
-      console.error(`Error in fetch: ${error.message}`)
-    }
   }
 
   const onRemoveHandler = () => {
