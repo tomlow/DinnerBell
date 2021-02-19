@@ -1,12 +1,16 @@
 import React, { useState, useEffect } from "react"
-import SavedRecipeTile from "./SavedRecipeTile.js"
+import { Link } from "react-router-dom"
 import _ from "lodash"
+
+import SavedRecipeTile from "./SavedRecipeTile.js"
 
 const UserProfilePage = (props) => {
 
   const [recipes, setRecipes] = useState([])
+  const [defaultDisplay, setDefaultDisplay] = useState(true)
+
   let recipeDisplay;
-  let profileDisplay = <div></div>;
+  let profileDisplay;
 
   const fetchSavedRecipes = async () => {
     try {
@@ -19,10 +23,6 @@ const UserProfilePage = (props) => {
       const responseBody = await response.json()
       const recipeData = responseBody.recipeData
       setRecipes(recipeData)
-      profileDisplay = <div className="profile-container text-center">
-        <h2>No recipes saved yet! Explore your pantry and add some!</h2>
-        {recipeDisplay}
-      </div>;
     } catch (error) {
       console.error(`Error in fetch: ${error.message}`);
     }
@@ -32,11 +32,19 @@ const UserProfilePage = (props) => {
     fetchSavedRecipes()
   }, [])
 
-  if (_.isEmpty(recipes)) {
+
+  if (!_.isEmpty(recipes) && defaultDisplay === true) {
+    setDefaultDisplay(false)
+  }
+
+  if (defaultDisplay) {
+    profileDisplay = <div className="profile-container text-center">
+      <h2>No recipes yet! Go check some out in the <Link to="/pantry">pantry</Link></h2>
+    </div>
     return profileDisplay
   }
 
-  if (!_.isEmpty(recipes)) {
+  if (!defaultDisplay) {
     recipeDisplay = <div className="tile-container"> {recipes.map((recipe, index) => {
       return <SavedRecipeTile key={index} recipe={recipe} />
     })}</div>
@@ -47,4 +55,5 @@ const UserProfilePage = (props) => {
     return profileDisplay
   }
 }
+
 export default UserProfilePage
