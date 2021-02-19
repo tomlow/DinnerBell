@@ -8,7 +8,6 @@ const IngredientForm = ({ postIngredient }) => {
     image: ""
   });
 
-
   const handleInputChange = value => {
     setInputValue(value)
   };
@@ -41,7 +40,6 @@ const IngredientForm = ({ postIngredient }) => {
           onChange={handleChange}
         />
       </div>
-
       <input className="button" type="submit" value="Put it in the Pantry" onSubmit={onSubmitHandler} />
     </form >
   </div >
