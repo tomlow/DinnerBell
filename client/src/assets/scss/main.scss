@@ -33,6 +33,16 @@ body {
   background-attachment: fixed;
 }
 
+.button:active,
+.button:focus,
+.button:hover {
+  outline-color: var(--clr-tertiary);
+}
+
+// .button:visited {
+//   outline-color: var(--clr-primary);
+// }
+
 .home-button {
   font-weight: bolder;
   font-size: 18px;
@@ -48,6 +58,7 @@ body {
 
 .ant-btn:hover {
   background-color: var(--clr-tertiary);
+  color: white;
 }
 
 .ant-btn-primary {
@@ -260,6 +271,7 @@ body {
   margin: auto auto 2rem;
   align-self: center;
   border-radius: 1%;
+  padding: 1rem;
 }
 
 .show-image {
