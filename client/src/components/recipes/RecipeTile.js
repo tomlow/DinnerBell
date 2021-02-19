@@ -20,7 +20,7 @@ const RecipeTile = ({ recipe }) => {
   const saveRecipe = async (recipePayload) => {
     try {
       debugger
-      const response = await fetch('/api/v1/recipes/', {
+      const response = await fetch('/api/v1/recipes', {
         method: "POST",
         headers: new Headers({
           "Content-Type": "application/json"

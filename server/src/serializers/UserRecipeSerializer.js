@@ -26,7 +26,6 @@ class UserRecipeSerializer {
       ingredient.amount = ingredient.amount / 100
     }
     serializedRecipe.instructions = await recipe.$relatedQuery("instructions")
-    debugger
     return serializedRecipe
   }
 }
