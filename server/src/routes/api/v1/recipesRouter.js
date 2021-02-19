@@ -100,8 +100,8 @@ recipesRouter.delete("/", async (req, res) => {
     await RecipeIngredient.query().where("recipeId", id).delete()
     await Instruction.query().where("recipeId", id).delete()
     await Recipe.query().findById(id).delete()
-
-    return res.status(201).json()
+    const updatedRecipes = await Recipe.query()
+    return res.status(201).json({ updatedRecipes: updatedRecipes })
   } catch (error) {
     return res.status(500).json({ error: error })
   }
