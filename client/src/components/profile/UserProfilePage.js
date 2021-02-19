@@ -27,6 +27,30 @@ const UserProfilePage = (props) => {
     }
   }
 
+  const removeRecipe = async (recipePayload) => {
+    try {
+      const response = await fetch("/api/v1/recipes", {
+        method: "DELETE",
+        headers: new Headers({
+          "Content-Type": "application/json"
+        }),
+        body: JSON.stringify(recipePayload)
+      })
+      if (!response.ok) {
+        const errorMessage = `${response.status} (${response.statusText})`
+        const error = new Error(errorMessage)
+        throw error
+      }
+      debugger
+      const responseBody = await response.json()
+      debugger
+      setRecipes(responseBody.updatedRecipes)
+      alert("Recipe removed!")
+    } catch (error) {
+      console.error(`Error in fetch: ${error.message}`)
+    }
+  }
+
   useEffect(() => {
     fetchSavedRecipes()
   }, [])
@@ -41,7 +65,7 @@ const UserProfilePage = (props) => {
 
   if (!_.isEmpty(recipes)) {
     recipeDisplay = <div className="tile-container"> {recipes.map((recipe, index) => {
-      return <SavedRecipeTile key={index} recipe={recipe} />
+      return <SavedRecipeTile key={index} recipe={recipe} removeRecipe={removeRecipe} />
     })}</div>
     profileDisplay = <div className="profile-container text-center">
       <h1>Choose an old favorite</h1>
