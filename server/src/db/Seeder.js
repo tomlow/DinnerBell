@@ -5,8 +5,6 @@ class Seeder {
     console.log("Seeding ingredients...")
     await IngredientSeeder.seed()
 
-
-    //eventual recipe seeds
     console.log("Done!")
     await connection.destroy()
   }

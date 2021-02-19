@@ -16,7 +16,6 @@ userRecipesRouter.get('/', async (req, res) => {
       const serializedRecipe = await UserRecipeSerializer.getSummary(recipe)
       serializedRecipes.push(serializedRecipe)
     }
-    debugger
     res.status(200).json({ recipeData: serializedRecipes })
   } catch (error) {
     res.status(500).json({ error: error })

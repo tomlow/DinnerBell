@@ -6,112 +6,79 @@ class IngredientSeeder {
     const ingredientData = [
       {
         name: "black beans",
+        image: "black-beans.jpg",
         userId: user.id
       },
       {
-        name: "tortillas",
+        name: "corn",
+        image: "corn.png",
         userId: user.id
       },
       {
-        name: "bread",
+        name: "avocados",
+        image: "avocado.jpg",
         userId: user.id
       },
       {
-        name: "hummus",
+        name: "cheddar",
+        image: "cheddar-cheese.png",
         userId: user.id
       },
       {
         name: "tomatoes",
+        image: "tomato.png",
         userId: user.id
       },
       {
-        name: "cheddar cheese",
-        userId: user.id
-      },
-      {
-        name: "hot sauce",
-        userId: user.id
-      },
-      {
-        name: "onions",
-        userId: user.id
-      },
-      {
-        name: "red peppers",
-        userId: user.id
-      },
-      {
-        name: "lettuce",
-        userId: user.id
-      },
-      {
-        name: "cabbage",
-        userId: user.id
-      },
-      {
-        name: "cauliflower",
-        userId: user.id
-      },
-      {
-        name: "broccoli",
-        userId: user.id
-      },
-      {
-        name: "carrots",
-        userId: user.id
-      },
-      {
-        name: "bananas",
-        userId: user.id
-      },
-      {
-        name: "apples",
-        userId: user.id
-      },
-      {
-        name: "celery",
-        userId: user.id
-      },
-      {
-        name: "peanut butter",
-        userId: user.id
-      },
-      {
-        name: "jam",
-        userId: user.id
-      },
-      {
-        name: "brie",
-        userId: user.id
-      },
-      {
-        name: "crackers",
-        userId: user.id
-      },
-      {
-        name: "english muffins",
-        userId: user.id
-      },
-      {
-        name: "cereal",
-        userId: user.id
-      },
-      {
-        name: "coffee beans",
+        name: "spaghetti pasta",
+        image: "spaghetti.jpg",
         userId: user.id
       },
       {
         name: "potatoes",
+        image: "potatoes-yukon-gold.png",
         userId: user.id
       },
       {
-        name: "tomato paste",
+        name: "shrimp",
+        image: "shrimp.png",
         userId: user.id
       },
       {
-        name: "pasta",
+        name: "flour tortillas",
+        image: "flour-tortilla.jpg",
         userId: user.id
       },
+      {
+        name: "onions",
+        image: "brown-onion.png",
+        userId: user.id
+      },
+      {
+        name: "chicken",
+        image: "whole-chicken.jpg",
+        userId: user.id
+      },
+      {
+        name: "wasabi peas",
+        image: "wasabi-peas.jpg",
+        userId: user.id
+      },
+      {
+        name: "salted butter",
+        image: "butter.jpg",
+        userId: user.id
+      },
+      {
+        name: "garlic",
+        image: "garlic.png",
+        userId: user.id
+      },
+      {
+        name: "olive oil",
+        image: "olive-oil.jpg",
+        userId: user.id
+      }
     ]
     for (const singleIngredient of ingredientData) {
       const currentIngredient = await Ingredient.query().findOne({ name: singleIngredient.name })

@@ -51,7 +51,6 @@ ingredientsRouter.post("/", async (req, res) => {
     const { name, image } = formInput
     const userId = req.user.id
     const newIngredient = await Ingredient.query().insertAndFetch({ name, image, userId })
-    debugger
     return res.status(201).json({ newIngredient: newIngredient })
   } catch (error) {
     if (error instanceof ValidationError) {

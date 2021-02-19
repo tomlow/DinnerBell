@@ -27,17 +27,16 @@ recipesRouter.get("/", async (req, res) => {
 
     for (const recipe of recipeDataWithInformation) {
       if (recipe.instructions !== null && recipe.analyzedInstructions !== []) {
-        debugger
         if (recipesToReturn.length < 18) {
           recipesToReturn.push(recipe)
         }
       }
     }
-
+    debugger
     const serializedRecipeData = recipesToReturn.map(recipe => {
       return RecipeSerializer.getSummary(recipe)
     })
-
+    debugger
     res.status(200).json({ recipeData: serializedRecipeData })
   }
   catch (error) {
@@ -46,35 +45,45 @@ recipesRouter.get("/", async (req, res) => {
 })
 
 recipesRouter.post("/", async (req, res) => {
+  debugger
   const userId = req.user.id
   const recipeData = req.body
   const { title, summary, image, missedIngredients, usedIngredients, ingredients, instructions, glutenFree, dairyFree, vegan, vegetarian, readyInMinutes, servings } = recipeData
-
+  debugger
   try {
     const newRecipe = await Recipe.query().insertAndFetch({ title, summary, image, glutenFree, dairyFree, vegan, vegetarian, readyInMinutes, servings, userId })
-
+    debugger
     const recipeId = newRecipe.id
+    debugger
     if (missedIngredients.length > 0) {
       for (const missedIngredient of missedIngredients) {
         const { name } = missedIngredient
-        await MissedIngredient.query().insert({ name, recipeId })
+        debugger
+        const newMissedIngredient = await MissedIngredient.query().insert({ name, recipeId })
+        debugger
       }
     }
 
     for (const usedIngredient of usedIngredients) {
       const { name } = usedIngredient
-      await UsedIngredient.query().insert({ name, recipeId })
+      debugger
+      const newUsedIngredient = await UsedIngredient.query().insert({ name, recipeId })
+      debugger
     }
 
     for (const ingredient of ingredients) {
       const { name, unit, amount } = ingredient
-      const integerAmount = amount * 100
-      await RecipeIngredient.query().insert({ name, unit, amount: integerAmount, recipeId })
+      const integerAmount = (amount * 100).toFixed(0)
+      debugger
+      const newRecipeIngredient = await RecipeIngredient.query().insert({ name, unit, amount: integerAmount, recipeId })
+      debugger
     }
 
     for (const instruction of instructions) {
       const { step } = instruction
-      await Instruction.query().insert({ step, recipeId })
+      debugger
+      const newInstruction = await Instruction.query().insert({ step, recipeId })
+      debugger
     }
 
     res.status(201).json()
@@ -84,10 +93,14 @@ recipesRouter.post("/", async (req, res) => {
 })
 
 recipesRouter.delete("/", async (req, res) => {
-  const { id } = req.body
-
   try {
+    const { id } = req.body
+    await UsedIngredient.query().where("recipeId", id).delete()
+    await MissedIngredient.query().where("recipeId", id).delete()
+    await RecipeIngredient.query().where("recipeId", id).delete()
+    await Instruction.query().where("recipeId", id).delete()
     await Recipe.query().findById(id).delete()
+
     return res.status(201).json()
   } catch (error) {
     return res.status(500).json({ error: error })
