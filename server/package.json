@@ -61,7 +61,7 @@
     "objection-unique": "^1.2.1",
     "passport": "^0.4.1",
     "passport-local": "^1.0.0",
-    "pg": "7.4.3",
+    "pg": "^8.5.1",
     "spoonacular_api": "^1.0.0"
   }
 }
