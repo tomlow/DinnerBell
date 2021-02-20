@@ -46,6 +46,10 @@ recipesRouter.post("/", async (req, res) => {
   const recipeData = req.body
   const { title, summary, image, missedIngredients, usedIngredients, ingredients, instructions, glutenFree, dairyFree, vegan, vegetarian, readyInMinutes, servings } = recipeData
   try {
+    const currentRecipe = await Recipe.query().findOne({ summary: summary })
+    if (currentRecipe) {
+      throw error
+    }
     const newRecipe = await Recipe.query().insertAndFetch({ title, summary, image, glutenFree, dairyFree, vegan, vegetarian, readyInMinutes, servings, userId })
     const recipeId = newRecipe.id
 

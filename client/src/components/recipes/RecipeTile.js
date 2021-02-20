@@ -1,7 +1,8 @@
 import React from "react"
+import { message } from "antd"
 import { Link } from "react-router-dom"
 
-const RecipeTile = ({ recipe, handleClick }) => {
+const RecipeTile = ({ recipe }) => {
   const recipeId = recipe.id
   const truncateRecipeSummary = (recipeSummary) => {
     if (recipeSummary.length > 100) {
@@ -9,6 +10,14 @@ const RecipeTile = ({ recipe, handleClick }) => {
       return truncatedRecipeSummary
     }
     else return recipeSummary
+  }
+
+  const saved = () => {
+    message.success("Recipe saved!")
+  }
+
+  const warning = () => {
+    message.warning("You've already saved that recipe!")
   }
 
   const truncateRecipeTitle = (recipeTitle) => {
@@ -32,8 +41,9 @@ const RecipeTile = ({ recipe, handleClick }) => {
         const error = new Error(errorMessage)
         throw error
       }
-      handleClick()
+      saved()
     } catch (error) {
+      warning()
       console.error(`Error in fetch: ${error.message}`)
     }
   }
