@@ -53,7 +53,7 @@ const IngredientEditForm = (props) => {
 
   const editIngredient = async (ingredientPayload) => {
     try {
-      const response = await fetch(`/api/v1/ingredients/`, {
+      const response = await fetch(`/api/v1/ingredients/${ingredientId}`, {
         method: "PATCH",
         headers: new Headers({
           "Content-Type": "application/json",

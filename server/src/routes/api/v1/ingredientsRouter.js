@@ -21,7 +21,6 @@ ingredientsRouter.get('/', async (req, res) => {
 ingredientsRouter.get('/autocomplete', async (req, res) => {
   const queryString = req.query
   try {
-    debugger
     const autoCompleteResults = await SpoonacularClient.autoCompleteByString(queryString.query)
     res.status(200).json(autoCompleteResults)
   } catch (error) {
@@ -56,13 +55,14 @@ ingredientsRouter.post("/", async (req, res) => {
   }
 })
 
-ingredientsRouter.patch("/", async (req, res) => {
+ingredientsRouter.patch("/:ingredientId", async (req, res) => {
   try {
     const { body } = req
+    const { ingredientId } = req.params
     const formInput = cleanUserInput(body)
     const { name, image } = formInput
 
-    await Ingredient.query().findOne({ name: name }).patch({ name: name, image: image })
+    await Ingredient.query().findById(ingredientId).patch({ name: name, image: image })
 
     return res.status(201).json()
   } catch (error) {

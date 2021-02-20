@@ -12,7 +12,6 @@ const recipesRouter = new express.Router()
 
 recipesRouter.get("/", async (req, res) => {
   const ingredientList = req.query.ingredientList
-
   try {
     const recipeData = await SpoonacularClient.searchRecipeByIngredients(ingredientList)
 
@@ -49,10 +48,11 @@ recipesRouter.post("/", async (req, res) => {
   try {
     const newRecipe = await Recipe.query().insertAndFetch({ title, summary, image, glutenFree, dairyFree, vegan, vegetarian, readyInMinutes, servings, userId })
     const recipeId = newRecipe.id
+
     if (missedIngredients.length > 0) {
       for (const missedIngredient of missedIngredients) {
-        const { name } = missedIngredient
-        const newMissedIngredient = await MissedIngredient.query().insert({ name, recipeId })
+        const { name, image } = missedIngredient
+        const newMissedIngredient = await MissedIngredient.query().insert({ name, image, recipeId })
       }
     }
 
