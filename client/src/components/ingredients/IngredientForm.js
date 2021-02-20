@@ -14,6 +14,7 @@ const IngredientForm = ({ postIngredient }) => {
   const handleChange = value => {
     setSelectedValue(value)
   }
+
   const loadOptions = (inputValue) => {
     return fetch(`/api/v1/ingredients/autocomplete?query=${inputValue}`).then(res => res.json())
   };

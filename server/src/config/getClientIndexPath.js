@@ -5,7 +5,7 @@ import config from "../config.js";
 const getClientIndexPath = () => {
   const currentPath = dirname(fileURLToPath(import.meta.url));
   let indexPath = path.join(currentPath, "../../public/dist/index.html");
-  if (config.env !== "production") {
+  if (config.nodeEnv !== "production") {
     indexPath = path.join(currentPath, "../../../client/public/index.html");
   }
 
