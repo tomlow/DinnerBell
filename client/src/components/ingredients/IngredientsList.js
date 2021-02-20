@@ -1,11 +1,33 @@
 import React, { useState, useEffect } from "react"
+import _ from "lodash"
+import { message } from "antd"
 import IngredientListItem from "./IngredientListItem.js"
 import IngredientForm from "./IngredientForm"
 
 const IngredientsList = ({ inventory, setInventory }) => {
   const [errors, setErrors] = useState([])
 
+  const warning = () => {
+    message.warning('You already have this ingredient!');
+  };
+
+  const emptyWarning = () => {
+    message.warning('Enter an ingredient first!')
+  }
+
+  const ingredientNames = inventory.map(item => {
+    return item.name
+  })
+
   const postIngredient = async (formPayload) => {
+    if (ingredientNames.includes(formPayload.name)) {
+      return warning()
+    }
+
+    if (formPayload.name === "") {
+      return emptyWarning()
+    }
+
     const response = await fetch('/api/v1/ingredients', {
       method: "POST",
       headers: new Headers({

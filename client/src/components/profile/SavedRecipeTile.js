@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 import { Link } from "react-router-dom"
 
-const SavedRecipeTile = ({ recipe, removeRecipe }) => {
+const SavedRecipeTile = ({ recipe, removeRecipe, handleClick }) => {
   const recipeId = recipe.id
   const truncateRecipeSummary = (recipeSummary) => {
     if (recipeSummary.length > 100) {
