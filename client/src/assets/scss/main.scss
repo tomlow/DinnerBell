@@ -419,6 +419,10 @@ ul.show-ingredients {
   }
 }
 
+.partial {
+  filter: opacity(0.5);
+}
+
 input {
   display: flex;
   align-items: center;

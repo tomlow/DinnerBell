@@ -1,21 +1,6 @@
 import React, { useState } from "react";
 import config from "../../config";
 import FormError from "../layout/FormError";
-import { Form, Input, Button, Checkbox } from 'antd';
-const layout = {
-  labelCol: {
-    span: 8,
-  },
-  wrapperCol: {
-    span: 16,
-  },
-};
-const tailLayout = {
-  wrapperCol: {
-    offset: 8,
-    span: 16,
-  },
-};
 
 const SignInForm = () => {
   const [userPayload, setUserPayload] = useState({ email: "", password: "" });
@@ -110,59 +95,6 @@ const SignInForm = () => {
           <input type="submit" className="button" value="Sign In" />
         </div>
       </form>
-
-
-
-      {/* <div className="sign-in-form" >
-        <Form
-          {...layout}
-          name="basic"
-          initialValues={{
-            remember: true,
-          }}
-          onSubmit={onSubmit}
-        // onFinish={onFinish}
-        // onFinishFailed={onFinishFailed}
-        >
-          <Form.Item
-            label="Username"
-            name="username"
-            rules={[
-              {
-                required: true,
-                message: 'Please input your username!',
-              },
-            ]}
-            onChange={onInputChange}
-          >
-            <Input style={{ width: 500 }} />
-          </Form.Item>
-
-          <Form.Item
-            label="Password"
-            name="password"
-            rules={[
-              {
-                required: true,
-                message: 'Please input your password!',
-              },
-            ]}
-            onChange={onInputChange}
-          >
-            <Input.Password style={{ width: 500, height: 50 }} />
-          </Form.Item>
-
-          <Form.Item {...tailLayout} name="remember" valuePropName="checked">
-            <Checkbox>Remember me</Checkbox>
-          </Form.Item>
-
-          <Form.Item {...tailLayout} style={{ alignSelf: "text-center" }}>
-            <Button onClick={onSubmit} type="primary" htmlType="submit" className="button">
-              Sign In
-        </Button>
-          </Form.Item>
-        </Form>
-      </div > */}
     </div>
   )
 };

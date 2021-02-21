@@ -5,13 +5,12 @@ import _ from "lodash"
 import IngredientsList from "./ingredients/IngredientsList.js"
 import RecipeDisplay from "./recipes/RecipeDisplay.js"
 
-const Pantry = (props) => {
+const Pantry = ({ currentUser }) => {
   const [inventory, setInventory] = useState([])
   const [recipes, setRecipes] = useState([])
-
   const myStorage = window.sessionStorage
 
-  if (myStorage.getItem("recipeData") !== null && recipes.length === 0) {
+  if (myStorage.getItem("recipeData") !== null && JSON.parse(myStorage.getItem("userData")).id === currentUser.id && recipes.length === 0) {
     const recipeDataParsed = JSON.parse(myStorage.getItem("recipeData"))
     setRecipes(recipeDataParsed)
   }
@@ -63,7 +62,9 @@ const Pantry = (props) => {
       const recipeData = responseBody.recipeData
       myStorage.clear()
       const recipeDataJSON = JSON.stringify(recipeData)
+      const currentUserJSON = JSON.stringify(currentUser)
       myStorage.setItem("recipeData", recipeDataJSON)
+      myStorage.setItem("userData", currentUserJSON)
       setRecipes(recipeData)
     } catch (error) {
       console.error(`Error in fetch: ${error.message}`);

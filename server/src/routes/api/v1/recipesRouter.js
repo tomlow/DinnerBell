@@ -83,19 +83,4 @@ recipesRouter.post("/", async (req, res) => {
   }
 })
 
-recipesRouter.delete("/", async (req, res) => {
-  try {
-    const { id } = req.body
-    await UsedIngredient.query().where("recipeId", id).delete()
-    await MissedIngredient.query().where("recipeId", id).delete()
-    await RecipeIngredient.query().where("recipeId", id).delete()
-    await Instruction.query().where("recipeId", id).delete()
-    await Recipe.query().findById(id).delete()
-    const remainingRecipes = await Recipe.query()
-    return res.status(201).json({ remainingRecipes: remainingRecipes })
-  } catch (error) {
-    return res.status(500).json({ error: error })
-  }
-})
-
 export default recipesRouter

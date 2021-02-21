@@ -1,7 +1,14 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import { Link } from "react-router-dom"
 
 const SavedRecipeTile = ({ recipe, removeRecipe, handleClick }) => {
+
+  const [gradientClass, setGradientClass] = useState("none")
+
+  // if (recipe.missedIngredients.length > 0 && gradientClass === "none") {
+  //   setGradientClass("partial")
+  // }
+
   const recipeId = recipe.id
   const truncateRecipeSummary = (recipeSummary) => {
     if (recipeSummary.length > 100) {
@@ -21,7 +28,7 @@ const SavedRecipeTile = ({ recipe, removeRecipe, handleClick }) => {
     removeRecipe(recipe)
   }
 
-  return <div className="card">
+  return <div className={`card ${gradientClass}`}>
     <div className="card__body">
       <Link
         id="recipe-show-link" to={{

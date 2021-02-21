@@ -2,6 +2,7 @@ import React from "react"
 import { Link } from "react-router-dom"
 const HomePage = ({ user }) => {
 
+
   const signUpRoute = "/users/new"
   const pantryRoute = "/pantry"
   return <div className="cell small-12 text-center">

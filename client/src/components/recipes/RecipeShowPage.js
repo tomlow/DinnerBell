@@ -2,7 +2,6 @@ import React from "react"
 
 const RecipeShowPage = (props) => {
   const recipe = props.location.state.recipe
-
   const recipeSteps = recipe.instructions.map((instruction, index) => {
     return <li key={index}>{instruction.step}</li>
   })
