@@ -1,13 +1,26 @@
 import React, { useState, useEffect } from "react"
 import { message } from "antd"
 import _ from "lodash"
+import getCurrentUser from "../services/getCurrentUser.js"
 
 import IngredientsList from "./ingredients/IngredientsList.js"
 import RecipeDisplay from "./recipes/RecipeDisplay.js"
 
-const Pantry = ({ currentUser }) => {
+const Pantry = (props) => {
   const [inventory, setInventory] = useState([])
   const [recipes, setRecipes] = useState([])
+  const [currentUser, setCurrentUser] = useState(undefined);
+
+  useEffect(() => {
+    getCurrentUser()
+      .then((user) => {
+        setCurrentUser(user);
+      })
+      .catch(() => {
+        setCurrentUser(null);
+      });
+  }, []);
+
   const myStorage = window.sessionStorage
 
   if (myStorage.getItem("recipeData") !== null && JSON.parse(myStorage.getItem("userData")).id === currentUser.id && recipes.length === 0) {

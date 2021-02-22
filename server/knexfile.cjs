@@ -11,5 +11,4 @@ module.exports = {
     extension: "cjs",
     stub: path.join(migrationPath, "migration.stub.cjs"),
   },
-  ssl: true
 };
