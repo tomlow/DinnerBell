@@ -6,26 +6,17 @@ import getCurrentUser from "../services/getCurrentUser.js"
 import IngredientsList from "./ingredients/IngredientsList.js"
 import RecipeDisplay from "./recipes/RecipeDisplay.js"
 
-const Pantry = (props) => {
+const Pantry = ({ currentUser }) => {
   const [inventory, setInventory] = useState([])
   const [recipes, setRecipes] = useState([])
-  const [currentUser, setCurrentUser] = useState(undefined);
-
-  useEffect(() => {
-    getCurrentUser()
-      .then((user) => {
-        setCurrentUser(user);
-      })
-      .catch(() => {
-        setCurrentUser(null);
-      });
-  }, []);
 
   const myStorage = window.sessionStorage
 
-  if (myStorage.getItem("recipeData") !== null && JSON.parse(myStorage.getItem("userData")).id === currentUser.id && recipes.length === 0) {
-    const recipeDataParsed = JSON.parse(myStorage.getItem("recipeData"))
-    setRecipes(recipeDataParsed)
+  if (currentUser) {
+    if (myStorage.getItem("recipeData") !== null && JSON.parse(myStorage.getItem("userData")).id === currentUser.id && recipes.length === 0) {
+      const recipeDataParsed = JSON.parse(myStorage.getItem("recipeData"))
+      setRecipes(recipeDataParsed)
+    }
   }
 
   const warning = () => {

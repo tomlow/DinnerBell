@@ -31,7 +31,7 @@ const IngredientForm = ({ postIngredient }) => {
   return <div>
     <form onSubmit={onSubmitHandler}>
       <label className="ingredient-form-label">What are you working with?</label >
-      <div>
+      <div className="autocomplete container">
         <AsyncSelect
           value={selectedValue}
           getOptionLabel={e => e.name}
@@ -39,6 +39,7 @@ const IngredientForm = ({ postIngredient }) => {
           loadOptions={loadOptions}
           onInputChange={handleInputChange}
           onChange={handleChange}
+
         />
       </div>
       <input className="button" type="submit" value="Put it in the Pantry" onSubmit={onSubmitHandler} />
