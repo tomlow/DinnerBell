@@ -1,6 +1,7 @@
 @import "./foundation/settings";
 @import "~foundation-sites/scss/foundation";
 @import "~antd/dist/antd.css";
+@import url("https://fonts.googleapis.com/css?family=Merriweather|Muli:300");
 @include foundation-everything;
 
 // place global css here
@@ -31,8 +32,6 @@ body {
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
-  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande", "Lucida Sans", Arial,
-    sans-serif;
 }
 
 .button:active,
@@ -251,7 +250,7 @@ body {
 }
 
 .tile-container {
-  // font-family: "Merriweather", "Muli";
+  font-family: "Merriweather", "Muli";
   margin: 2rem;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(12rem, 16rem));
@@ -424,7 +423,7 @@ input {
 }
 
 h1 {
-  // font-family: "Merriweather", Serif;
+  font-family: "Merriweather", Serif;
   font-size: 46px;
 }
 
