@@ -31,7 +31,8 @@ body {
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
-  font-family: "Merriweather", "multi";
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande", "Lucida Sans", Arial,
+    sans-serif;
 }
 
 .button:active,
@@ -39,10 +40,6 @@ body {
 .button:hover {
   outline-color: var(--clr-tertiary);
 }
-
-// .button:visited {
-//   outline-color: var(--clr-primary);
-// }
 
 .home-button {
   font-weight: bolder;
@@ -162,10 +159,6 @@ body {
   padding-bottom: 4.5rem;
 }
 
-// .pantry-container {
-//   padding-bottom: 2rem;
-// }
-
 .ingredient-form-container {
   background-color: rgba(255, 255, 255, 0.8);
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
@@ -258,7 +251,7 @@ body {
 }
 
 .tile-container {
-  font-family: "Merriweather", "Muli";
+  // font-family: "Merriweather", "Muli";
   margin: 2rem;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(12rem, 16rem));
@@ -268,7 +261,7 @@ body {
 }
 
 .grid-container {
-  font-family: "Merriweather", "Muli";
+  // font-family: "Merriweather", "Muli";
   max-width: 75rem;
   margin-left: auto;
   margin-right: auto;
@@ -431,7 +424,7 @@ input {
 }
 
 h1 {
-  font-family: "Merriweather", Serif;
+  // font-family: "Merriweather", Serif;
   font-size: 46px;
 }
 
