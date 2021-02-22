@@ -2,7 +2,7 @@ import Ingredient from "../../models/Ingredient.js"
 import User from "../../models/User.js"
 class IngredientSeeder {
   static async seed() {
-    const user = await User.query().findById(1)
+    const user = await User.query().first()
     const ingredientData = [
       {
         name: "black beans",

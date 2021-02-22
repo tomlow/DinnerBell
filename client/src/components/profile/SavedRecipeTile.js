@@ -5,9 +5,9 @@ const SavedRecipeTile = ({ recipe, removeRecipe, handleClick }) => {
 
   const [gradientClass, setGradientClass] = useState("none")
 
-  // if (recipe.missedIngredients.length > 0 && gradientClass === "none") {
-  //   setGradientClass("partial")
-  // }
+  if (recipe.missedIngredients.length > 0 && gradientClass === "none") {
+    setGradientClass("partial")
+  }
 
   const recipeId = recipe.id
   const truncateRecipeSummary = (recipeSummary) => {
