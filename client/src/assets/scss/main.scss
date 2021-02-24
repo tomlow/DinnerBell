@@ -146,7 +146,7 @@ body {
   letter-spacing: 3px;
   color: var(--clr-primary);
   text-shadow: 2px 2px rgb(92, 12, 12);
-  text-transform: lowercase;
+  // text-transform: lowercase;
   font-style: italic;
   padding: 0px;
   line-height: 120px;
@@ -193,10 +193,6 @@ body {
 .css-g1d714-ValueContainer {
   height: 50px;
   border-radius: 6px;
-}
-
-.ingredient-form-label {
-  font-size: 30px;
 }
 
 .ingredient-list-container {

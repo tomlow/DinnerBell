@@ -39,7 +39,11 @@ const IngredientForm = ({ postIngredient }) => {
           loadOptions={loadOptions}
           onInputChange={handleInputChange}
           onChange={handleChange}
-
+          classNamePrefix="ingredient-input"
+          style={{
+            height: 500,
+            borderRadius: 6
+          }}
         />
       </div>
       <input className="button" type="submit" value="Put it in the Pantry" onSubmit={onSubmitHandler} />
