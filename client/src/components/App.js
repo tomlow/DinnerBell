@@ -17,6 +17,7 @@ import UserProfilePage from "./profile/UserProfilePage.js"
 import HomePage from "./layout/HomePage.js"
 
 const App = (props) => {
+
   const [currentUser, setCurrentUser] = useState(undefined);
   useEffect(() => {
     getCurrentUser()
