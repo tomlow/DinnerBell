@@ -14,7 +14,7 @@ Finally, a postgreSQL relational database structure backs user data in a low-run
 
 This application also uses AWS image storage, session storage, and Cypress testing.
 
-[Click here visit DinnerBell's Heroku page](https://launch31-dinner-bell-app.herokuapp.com/)
+[Click here to visit DinnerBell's Heroku page](https://launch31-dinner-bell-app.herokuapp.com/)
 
 ## Written in
 
