@@ -46,3 +46,7 @@ Creates and migrates the database (must be run from the server directory)
 #### `yarn run dev`
 
 Starts the Express server. This application can be accessed locally at http://localhost:3000
+
+#### `yarn run db:seed`
+
+Seeds database with sample ingredients for a demonstration or test. Must be registered as a user first, and must be run from the server directory.
