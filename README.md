@@ -16,13 +16,24 @@ This application also uses AWS image storage, session storage, and Cypress testi
 
 [Click here to visit DinnerBell's Heroku page](https://launch31-dinner-bell-app.herokuapp.com/)
 
-## Written in
+## Technologies Used
 
-- React
-- Node.js/Express
-- PostgreSQL
+- React - 16.13
+- Express - 4.17.1
+- Node - 14.15
+- PostgreSQL - 8.5.1
+- Objection
+- Knex
+- Passport
+- Spoonacular API
+- React Select
+- Material UI
+- Ant Design
+- Webpack
 
 ## Available Scripts and Installation Instructions
+
+Clone the repo and run the following.
 
 #### `yarn install`
 
