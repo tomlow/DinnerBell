@@ -50,3 +50,9 @@ Starts the Express server. This application can be accessed locally at http://lo
 #### `yarn run db:seed`
 
 Seeds database with sample ingredients for a demonstration or test. Must be registered as a user first, and must be run from the server directory.
+
+## Coming Soon
+
+- Shopping list feature--automatically remove ingredients used in recipes from your pantry and add them to a shopping list.
+- Dietary options when searching recipes
+- Inter-user messaging
