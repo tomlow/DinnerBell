@@ -8,32 +8,23 @@ import UsedIngredient from "../../../models/UsedIngredient.js"
 import RecipeIngredient from "../../../models/RecipeIngredient.js"
 import Instruction from "../../../models/Instruction.js"
 
+import RecipeDataProcesser from "../../../services/RecipeDataProcesser.js"
+
 const recipesRouter = new express.Router()
 
 recipesRouter.get("/", async (req, res) => {
   const ingredientList = req.query.ingredientList
   try {
     const recipeData = await SpoonacularClient.searchRecipeByIngredients(ingredientList)
-
-    const recipesToReturn = []
     const recipeIds = recipeData.map(recipe => recipe.id).join(",")
     const recipeDataWithInformation = await SpoonacularClient.getRecipeInformationBulk(recipeIds)
 
-    recipeDataWithInformation.forEach(recipeWithInformation => {
-      recipeWithInformation.missedIngredients = recipeData[recipeDataWithInformation.indexOf(recipeWithInformation)].missedIngredients
-      recipeWithInformation.usedIngredients = recipeData[recipeDataWithInformation.indexOf(recipeWithInformation)].usedIngredients
-    })
-
-    for (const recipe of recipeDataWithInformation) {
-      if (recipe.instructions !== null && recipe.analyzedInstructions !== []) {
-        if (recipesToReturn.length < 18) {
-          recipesToReturn.push(recipe)
-        }
-      }
-    }
+    const recipesToReturn = RecipeDataProcesser.normalizeData(recipeData, recipeDataWithInformation)
+    debugger
     const serializedRecipeData = recipesToReturn.map(recipe => {
       return RecipeSerializer.getSummary(recipe)
     })
+
     res.status(200).json({ recipeData: serializedRecipeData })
   }
   catch (error) {
