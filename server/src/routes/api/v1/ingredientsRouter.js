@@ -1,7 +1,6 @@
 import express from "express"
 import cleanUserInput from "../../../services/cleanUserInput.js"
 import Ingredient from "../../../models/Ingredient.js"
-import User from "../../../models/User.js"
 import objection from "objection"
 const { ValidationError } = objection
 
@@ -78,6 +77,7 @@ ingredientsRouter.delete("/:ingredientId", async (req, res) => {
   try {
     const userId = req.user.id
     const { ingredientId } = req.params
+
     await Ingredient.query().findById(ingredientId).delete()
 
     const remainingIngredients = await Ingredient.query().where("userId", userId)
