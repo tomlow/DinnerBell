@@ -2,10 +2,6 @@ import express from "express"
 
 import User from "../../../models/User.js"
 import Recipe from "../../../models/Recipe.js"
-import UsedIngredient from "../../../models/UsedIngredient.js"
-import MissedIngredient from "../../../models/MissedIngredient.js"
-import RecipeIngredient from "../../../models/RecipeIngredient.js"
-import Instruction from "../../../models/Instruction.js"
 
 import UserRecipeSerializer from "../../../serializers/UserRecipeSerializer.js"
 
@@ -23,6 +19,27 @@ userRecipesRouter.get('/', async (req, res) => {
       serializedRecipes.push(serializedRecipe)
     }
     res.status(200).json({ recipeData: serializedRecipes })
+  } catch (error) {
+    res.status(500).json({ error: error })
+  }
+})
+
+userRecipesRouter.post("/", async (req, res) => {
+  const userId = req.user.id
+  const recipeData = req.body
+  const { title, summary, image, missedIngredients, usedIngredients, ingredients, instructions, glutenFree, dairyFree, vegan, vegetarian, readyInMinutes, servings } = recipeData
+  try {
+    const currentRecipe = await Recipe.query().findOne({ summary: summary })
+    if (currentRecipe) {
+      throw error
+    }
+
+    const newRecipe = await Recipe.query().insertAndFetch({ title, summary, image, glutenFree, dairyFree, vegan, vegetarian, readyInMinutes, servings, userId })
+    const recipeId = newRecipe.id
+
+    RecipeDataProcesser.addIngredientsAndInstructions(recipeData, recipeId)
+
+    res.status(201).json()
   } catch (error) {
     res.status(500).json({ error: error })
   }
