@@ -10,7 +10,6 @@ const IngredientListItem = ({ ingredient, deleteIngredient }) => {
     deleteIngredient(ingredient)
   }
 
-
   return <div className="ingredient-list-item">
     <div className="ingredient-right-column">
       <img src={`https://spoonacular.com/cdn/ingredients_100x100/${ingredient.image}`} alt="an api-provided image for this ingredient" />

@@ -1,11 +1,10 @@
-import React, { useState, useEffect } from "react"
+import React from "react"
 import _ from "lodash"
 import { message } from "antd"
 import IngredientListItem from "./IngredientListItem.js"
 import IngredientForm from "./IngredientForm"
 
 const IngredientsList = ({ inventory, setInventory }) => {
-  const [errors, setErrors] = useState([])
 
   const warning = () => {
     message.warning('You already have this ingredient!');
@@ -38,8 +37,6 @@ const IngredientsList = ({ inventory, setInventory }) => {
     if (!response.ok) {
       if (response.status === 422) {
         const body = await response.json()
-        const newErrors = translateServerErrors(body.errors)
-        return setErrors(newErrors)
       } else {
         const errorMessage = `${response.status} (${response.statusText})`
         const error = new Error(errorMessage)
@@ -49,7 +46,6 @@ const IngredientsList = ({ inventory, setInventory }) => {
     else {
       const responseBody = await response.json()
       const newIngredient = responseBody.newIngredient
-      setErrors([])
       setInventory([...inventory, newIngredient])
     }
   }
