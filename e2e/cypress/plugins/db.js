@@ -1,6 +1,7 @@
 const truncateModel = require("../../../server/test/utils/truncateModel.cjs");
 const connection = require("../../../server/src/boot/model.cjs");
 const modelList = require("../../../server/src/models");
+// import Seeder from "../../../server/src/db/Seeder.js"
 
 const truncate = async (models) => {
   let modelsToTruncate = models;
@@ -39,10 +40,16 @@ const deleteRecords = async ({ modelName, conditions = {} }) => {
   return result;
 };
 
+// const seed = async () => {
+//   await Seeder.seed()
+//   return
+// }
+
 module.exports = {
   find,
   deleteRecords,
   insert,
   truncate,
   update,
+  // seed
 };

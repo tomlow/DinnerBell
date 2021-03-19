@@ -50,12 +50,14 @@ userRecipesRouter.post("/", async (req, res) => {
 userRecipesRouter.delete("/", async (req, res) => {
   try {
     const { id } = req.body
+    const userId = req.user.id
+    const user = await User.query().findById(userId)
     await UsedIngredient.query().where("recipeId", id).delete()
     await MissedIngredient.query().where("recipeId", id).delete()
     await RecipeIngredient.query().where("recipeId", id).delete()
     await Instruction.query().where("recipeId", id).delete()
     await Recipe.query().findById(id).delete()
-    const remainingRecipes = await Recipe.query()
+    const remainingRecipes = await user.$relatedQuery("recipes")
 
     const serializedRemainingRecipes = []
 

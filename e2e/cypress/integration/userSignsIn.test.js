@@ -47,4 +47,14 @@ describe("As a user visiting the sign in page", () => {
       cy.contains("is invalid");
     });
   });
+
+  it("I will see an error message when no password is provided", () => {
+    visitSignInPage();
+    cy.get("form").within(() => {
+      cy.findByLabelText("Email").type("user@example.com");
+      cy.root().submit();
+
+      cy.contains("is required")
+    })
+  })
 });
