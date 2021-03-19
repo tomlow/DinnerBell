@@ -57,8 +57,8 @@ userRecipesRouter.delete("/", async (req, res) => {
     await RecipeIngredient.query().where("recipeId", id).delete()
     await Instruction.query().where("recipeId", id).delete()
     await Recipe.query().findById(id).delete()
-    const remainingRecipes = await user.$relatedQuery("recipes")
-
+    // const remainingRecipes = await user.$relatedQuery("recipes")
+    const remainingRecipes = await Recipe.query()
     const serializedRemainingRecipes = []
 
     for (const recipe of remainingRecipes) {
