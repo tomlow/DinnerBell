@@ -2,6 +2,10 @@ import express from "express"
 
 import User from "../../../models/User.js"
 import Recipe from "../../../models/Recipe.js"
+import UsedIngredient from "../../../models/UsedIngredient.js"
+import MissedIngredient from "../../../models/MissedIngredient.js"
+import RecipeIngredient from "../../../models/RecipeIngredient.js"
+import Instruction from "../../../models/Instruction.js"
 
 import UserRecipeSerializer from "../../../serializers/UserRecipeSerializer.js"
 
@@ -30,16 +34,36 @@ userRecipesRouter.post("/", async (req, res) => {
   const { title, summary, image, missedIngredients, usedIngredients, ingredients, instructions, glutenFree, dairyFree, vegan, vegetarian, readyInMinutes, servings } = recipeData
   try {
     const currentRecipe = await Recipe.query().findOne({ summary: summary })
-
     if (currentRecipe) {
       throw error
     }
-
     const newRecipe = await Recipe.query().insertAndFetch({ title, summary, image, glutenFree, dairyFree, vegan, vegetarian, readyInMinutes, servings, userId })
 
     const recipeId = newRecipe.id
 
-    RecipeDataProcesser.addIngredientsAndInstructions(recipeData, recipeId)
+    if (missedIngredients.length > 0) {
+      for (const missedIngredient of missedIngredients) {
+        const { name, image } = missedIngredient
+        const newMissedIngredient = await MissedIngredient.query().insert({ name, image, recipeId })
+      }
+    }
+
+    for (const usedIngredient of usedIngredients) {
+      const { name } = usedIngredient
+      const newUsedIngredient = await UsedIngredient.query().insert({ name, recipeId })
+    }
+
+    for (const ingredient of ingredients) {
+      const { name, unit, amount } = ingredient
+      const integerAmount = (amount * 100).toFixed(0)
+      const newRecipeIngredient = await RecipeIngredient.query().insert({ name, unit, amount: integerAmount, recipeId })
+
+    }
+
+    for (const instruction of instructions) {
+      const { step } = instruction
+      const newInstruction = await Instruction.query().insert({ step, recipeId })
+    }
 
     res.status(201).json()
   } catch (error) {
@@ -50,14 +74,11 @@ userRecipesRouter.post("/", async (req, res) => {
 userRecipesRouter.delete("/", async (req, res) => {
   try {
     const { id } = req.body
-    const userId = req.user.id
-    const user = await User.query().findById(userId)
     await UsedIngredient.query().where("recipeId", id).delete()
     await MissedIngredient.query().where("recipeId", id).delete()
     await RecipeIngredient.query().where("recipeId", id).delete()
     await Instruction.query().where("recipeId", id).delete()
     await Recipe.query().findById(id).delete()
-    // const remainingRecipes = await user.$relatedQuery("recipes")
     const remainingRecipes = await Recipe.query()
     const serializedRemainingRecipes = []
 
