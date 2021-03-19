@@ -28,9 +28,8 @@ const IngredientForm = ({ postIngredient }) => {
     })
   }
 
-  return <div>
-    <form onSubmit={onSubmitHandler}>
-      <label className="ingredient-form-label">What are you working with?</label >
+  return <form onSubmit={onSubmitHandler}>
+    <label className="ingredient-form-label">What are you working with?
       <div className="autocomplete container">
         <AsyncSelect
           value={selectedValue}
@@ -46,9 +45,9 @@ const IngredientForm = ({ postIngredient }) => {
           }}
         />
       </div>
-      <input className="button" type="submit" value="Put it in the Pantry" onSubmit={onSubmitHandler} />
-    </form >
-  </div >
+    </label >
+    <input className="button" type="submit" value="Put it in the Pantry" onSubmit={onSubmitHandler} />
+  </form >
 }
 
 export default IngredientForm

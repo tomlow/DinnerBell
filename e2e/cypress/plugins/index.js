@@ -21,6 +21,9 @@ module.exports = (on, config) => {
     "db:update"({ modelName, conditions, json }) {
       return update({ modelName, conditions, json });
     },
+    // "db:seed"() {
+    //   return seed()
+    // }
   });
   return config;
 };
