@@ -10,6 +10,7 @@ import RegistrationForm from "./registration/RegistrationForm";
 import SignInForm from "./authentication/SignInForm";
 import TopBar from "./layout/TopBar";
 import AuthenticatedRoute from "./authentication/AuthenticatedRoute.js"
+import GuidePage from "./layout/GuidePage.js"
 import Pantry from "./Pantry.js"
 import IngredientEditForm from "./ingredients/IngredientEditForm.js"
 import RecipeShowPage from "./recipes/RecipeShowPage.js"
@@ -38,6 +39,7 @@ const App = (props) => {
           </Route>
           <Route exact path="/users/new" component={RegistrationForm} />
           <Route exact path="/user-sessions/new" component={SignInForm} />
+          <GuidePage exact path="/guide" />
           <Pantry exact path="/pantry" currentUser={currentUser} />
           <Route exact path="/ingredients/edit/:id" component={IngredientEditForm} />
           <Route exact path="/recipes/:id" component={RecipeShowPage} />
