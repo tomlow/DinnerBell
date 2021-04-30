@@ -8,8 +8,8 @@ const IngredientsList = ({ inventory, setInventory }) => {
   const [errors, setErrors] = useState([])
 
   const warning = () => {
-    message.warning('You already have this ingredient!');
-  };
+    message.warning('You already have this ingredient!')
+  }
 
   const emptyWarning = () => {
     message.warning('Enter an ingredient first!')
@@ -35,6 +35,7 @@ const IngredientsList = ({ inventory, setInventory }) => {
       }),
       body: JSON.stringify(formPayload)
     })
+
     if (!response.ok) {
       if (response.status === 422) {
         const body = await response.json()
