@@ -18,8 +18,8 @@ const Pantry = ({ currentUser }) => {
   }
 
   const warning = () => {
-    message.warning('No ingredients to search by!');
-  };
+    message.warning('No ingredients to search by!')
+  }
 
   const loading = () => {
     message.loading("Gathering cookbooks...", 1.5)
@@ -57,8 +57,8 @@ const Pantry = ({ currentUser }) => {
       const response = await fetch(`/api/v1/recipes/?ingredientList=${ingredientQueryString}`)
       if (!response.ok) {
         const errorMessage = `${response.status} (${response.statusText})`
-        const error = new Error(errorMessage);
-        throw (error);
+        const error = new Error(errorMessage)
+        throw (error)
       }
       const responseBody = await response.json()
       const recipeData = responseBody.recipeData
@@ -69,12 +69,12 @@ const Pantry = ({ currentUser }) => {
       myStorage.setItem("userData", currentUserJSON)
       setRecipes(recipeData)
     } catch (error) {
-      console.error(`Error in fetch: ${error.message}`);
+      console.error(`Error in fetch: ${error.message}`)
     }
   }
 
   return <div className="pantry-container">
-    <IngredientsList inventory={inventory} setInventory={setInventory} />
+    <IngredientsList inventory={inventory} setInventory={setInventory} currentUser={currentUser} />
     <RecipeDisplay queryByIngredients={queryByIngredients} recipes={recipes} />
   </div>
 }

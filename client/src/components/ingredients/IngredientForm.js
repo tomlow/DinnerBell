@@ -1,27 +1,28 @@
 import React, { useState } from "react"
-import AsyncSelect from 'react-select/async';
+import AsyncSelect from 'react-select/async'
 
 const IngredientForm = ({ postIngredient }) => {
-  const [inputValue, setInputValue] = useState('');
+  const [inputValue, setInputValue] = useState('')
   const [selectedValue, setSelectedValue] = useState({
     name: "",
     image: ""
-  });
+  })
 
   const handleInputChange = value => {
     setInputValue(value)
-  };
+  }
   const handleChange = value => {
     setSelectedValue(value)
   }
 
   const loadOptions = (inputValue) => {
     return fetch(`/api/v1/ingredients/autocomplete?query=${inputValue}`).then(res => res.json())
-  };
+  }
 
   const onSubmitHandler = (event) => {
     event.preventDefault()
     postIngredient(selectedValue)
+
     setSelectedValue({
       name: "",
       image: ""

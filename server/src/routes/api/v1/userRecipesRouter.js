@@ -57,7 +57,6 @@ userRecipesRouter.post("/", async (req, res) => {
       const { name, unit, amount } = ingredient
       const integerAmount = (amount * 100).toFixed(0)
       const newRecipeIngredient = await RecipeIngredient.query().insert({ name, unit, amount: integerAmount, recipeId })
-
     }
 
     for (const instruction of instructions) {

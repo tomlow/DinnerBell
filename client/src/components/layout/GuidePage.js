@@ -18,7 +18,7 @@ const GuidePage = (props) => {
 
       <p>Greyed-out recipes mean you're still missing some ingredients, but no worries: anything you still need will be on the recipe's instruction page!</p>
 
-      <p>Ready to eat? <Link to="/user-session/new">Let's get cooking.</Link></p>
+      <p>Ready to eat? <Link to="/users/new">Let's get cooking.</Link></p>
 
       <p>The Creator</p>
     </div>

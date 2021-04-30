@@ -4,12 +4,12 @@ import { message } from "antd"
 import IngredientListItem from "./IngredientListItem.js"
 import IngredientForm from "./IngredientForm"
 
-const IngredientsList = ({ inventory, setInventory }) => {
+const IngredientsList = ({ inventory, setInventory, currentUser }) => {
   const [errors, setErrors] = useState([])
 
   const warning = () => {
-    message.warning('You already have this ingredient!');
-  };
+    message.warning('You already have this ingredient!')
+  }
 
   const emptyWarning = () => {
     message.warning('Enter an ingredient first!')
@@ -26,6 +26,10 @@ const IngredientsList = ({ inventory, setInventory }) => {
 
     if (formPayload.name === "") {
       return emptyWarning()
+    }
+
+    if (!currentUser) {
+      return setInventory([...inventory, formPayload])
     }
 
     const response = await fetch('/api/v1/ingredients', {

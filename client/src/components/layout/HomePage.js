@@ -1,5 +1,6 @@
 import React from "react"
 import { Link } from "react-router-dom"
+
 const HomePage = ({ user }) => {
 
   const guideRoute = "/guide"
@@ -10,7 +11,7 @@ const HomePage = ({ user }) => {
         <h1>welcome to DinnerBell</h1>
       </div>
       <div>
-        <Link to={user ? pantryRoute : guideRoute}><button className="button start-button"><h2>let's get cooking</h2></button></Link>
+        <Link to={pantryRoute}><button className="button start-button"><h2>let's get cooking</h2></button></Link>
       </div>
     </div >
   </div >
