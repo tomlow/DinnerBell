@@ -10,7 +10,7 @@ const Pantry = ({ currentUser }) => {
 
   const myStorage = window.sessionStorage
 
-  if (currentUser && !myStorage.getItem("userData")) {
+  if (currentUser && myStorage.getItem("userData")) {
     if (myStorage.getItem("recipeData") !== null && JSON.parse(myStorage.getItem("userData")).id === currentUser.id && recipes.length === 0) {
       const recipeDataParsed = JSON.parse(myStorage.getItem("recipeData"))
       setRecipes(recipeDataParsed)
