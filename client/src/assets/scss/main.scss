@@ -256,6 +256,15 @@ body {
   color: var(--clr-primary);
 }
 
+.recipe-button-container {
+  text-align: center;
+  width: 200px;
+  background-color: rgba(255, 255, 255, 0.8);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  margin: auto;
+  border-radius: 6px;
+}
+
 .tile-container {
   font-family: "Merriweather", "Muli";
   margin: 2rem;
@@ -267,7 +276,6 @@ body {
 }
 
 .grid-container {
-  // font-family: "Merriweather", "Muli";
   max-width: 75rem;
   margin-left: auto;
   margin-right: auto;

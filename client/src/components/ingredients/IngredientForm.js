@@ -30,7 +30,7 @@ const IngredientForm = ({ postIngredient }) => {
   }
 
   return <form onSubmit={onSubmitHandler}>
-    <label className="ingredient-form-label">What are you working with?
+    <label className="ingredient-form-label">Enter ingredients below to fill your pantry, then click 'What's for Dinner' to see what you can make!
       <div className="autocomplete container">
         <AsyncSelect
           value={selectedValue}

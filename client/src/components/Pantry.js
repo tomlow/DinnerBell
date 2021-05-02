@@ -9,7 +9,7 @@ const Pantry = ({ currentUser }) => {
   const [recipes, setRecipes] = useState([])
 
   const myStorage = window.sessionStorage
-
+  console.log("This is a rendering of the pantry page")
   if (currentUser) {
     if (myStorage.getItem("recipeData") !== null && JSON.parse(myStorage.getItem("userData")).id === currentUser.id && recipes.length === 0) {
       const recipeDataParsed = JSON.parse(myStorage.getItem("recipeData"))
@@ -43,6 +43,7 @@ const Pantry = ({ currentUser }) => {
   }
 
   useEffect(() => {
+    console.log("I'm the fetch inventory function and I run here!")
     fetchInventory()
   }, [])
 
@@ -75,7 +76,7 @@ const Pantry = ({ currentUser }) => {
 
   return <div className="pantry-container">
     <IngredientsList inventory={inventory} setInventory={setInventory} currentUser={currentUser} />
-    <RecipeDisplay queryByIngredients={queryByIngredients} recipes={recipes} />
+    <RecipeDisplay queryByIngredients={queryByIngredients} recipes={recipes} currentUser={currentUser} />
   </div>
 }
 

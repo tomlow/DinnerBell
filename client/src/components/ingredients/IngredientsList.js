@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"
+import React, { useState } from "react"
 import _ from "lodash"
 import { message } from "antd"
 import IngredientListItem from "./IngredientListItem.js"
@@ -59,6 +59,13 @@ const IngredientsList = ({ inventory, setInventory, currentUser }) => {
   }
 
   const deleteIngredient = async (ingredientPayload) => {
+    if (!currentUser) {
+      const toDelete = inventory.find(ingredient => ingredient.name === ingredientPayload.name)
+      const deleteIdx = inventory.indexOf(toDelete)
+      inventory.splice(deleteIdx, 1)
+      return setInventory([...inventory])
+    }
+
     try {
       const response = await fetch(`/api/v1/ingredients/${ingredientPayload.id}`, {
         method: "DELETE",
@@ -84,7 +91,7 @@ const IngredientsList = ({ inventory, setInventory, currentUser }) => {
       <h1>Welcome to your pantry, Master Chef!</h1>
       <IngredientForm postIngredient={postIngredient} />
     </div>
-    <div className="ingredient-list-container grid-x">
+    <div className={inventory.length > 0 ? "ingredient-list-container grid-x" : ""}>
       <div className="ingredient-list large-12 cell">
         {inventoryList}
       </div>

@@ -2,7 +2,7 @@ import React from "react"
 import { message } from "antd"
 import { Link } from "react-router-dom"
 
-const RecipeTile = ({ recipe }) => {
+const RecipeTile = ({ recipe, currentUser }) => {
   const recipeId = recipe.id
   const truncateRecipeSummary = (recipeSummary) => {
     if (recipeSummary.length > 100) {
@@ -10,6 +10,10 @@ const RecipeTile = ({ recipe }) => {
       return truncatedRecipeSummary
     }
     else return recipeSummary
+  }
+
+  const signInPrompt = () => {
+    message.info("Sign up to save recipes to your profile for later!")
   }
 
   const saved = () => {
@@ -28,6 +32,10 @@ const RecipeTile = ({ recipe }) => {
   }
 
   const saveRecipe = async (recipePayload) => {
+    if (!currentUser) {
+      return signInPrompt()
+    }
+
     try {
       const response = await fetch('/api/v1/userRecipes', {
         method: "POST",
@@ -81,4 +89,4 @@ const RecipeTile = ({ recipe }) => {
   </div>
 }
 
-export default RecipeTile;
+export default RecipeTile

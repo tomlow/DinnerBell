@@ -1,28 +1,28 @@
 import React, { useState, useEffect } from "react"
 import { Redirect } from "react-router-dom"
 import translateServerErrors from "../../services/translateServerErrors.js"
-import AsyncSelect from 'react-select/async';
+import AsyncSelect from 'react-select/async'
 
 const IngredientEditForm = (props) => {
   const [shouldRedirect, setShouldRedirect] = useState(false)
   const { id: ingredientId } = props.match.params
-  const [inputValue, setInputValue] = useState('');
+  const [inputValue, setInputValue] = useState('')
   const [selectedValue, setSelectedValue] = useState({
     name: "",
     image: ""
-  });
+  })
   const [errors, setErrors] = useState([])
 
   const handleInputChange = value => {
     setInputValue(value)
-  };
+  }
 
   const handleChange = value => {
     setSelectedValue(value)
   }
   const loadOptions = (inputValue) => {
     return fetch(`/api/v1/ingredients/autocomplete?query=${inputValue}`).then(res => res.json())
-  };
+  }
 
   const onSubmitHandler = (event) => {
     event.preventDefault()
@@ -34,6 +34,7 @@ const IngredientEditForm = (props) => {
   }
 
   const fetchIngredient = async () => {
+
     try {
       const response = await fetch(`/api/v1/ingredients/${ingredientId}`)
       if (!response.ok) {
