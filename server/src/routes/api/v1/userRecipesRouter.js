@@ -33,7 +33,9 @@ userRecipesRouter.post("/", async (req, res) => {
   const recipeData = req.body
   const { title, summary, image, missedIngredients, usedIngredients, ingredients, instructions, glutenFree, dairyFree, vegan, vegetarian, readyInMinutes, servings } = recipeData
   try {
-    const currentRecipe = await Recipe.query().findOne({ summary: summary })
+    const currentUser = await User.query().findById(userId)
+    const userRecipes = await currentUser.$relatedQuery("recipes")
+    const currentRecipe = userRecipes.find(recipe => recipe.summary === summary)
     if (currentRecipe) {
       throw error
     }
