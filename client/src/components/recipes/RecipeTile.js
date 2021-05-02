@@ -1,9 +1,8 @@
-import React, { useState } from "react"
+import React from "react"
 import { message } from "antd"
 import { Link } from "react-router-dom"
 
 const RecipeTile = ({ recipe }) => {
-  const [recipeSaved, setRecipeSaved] = useState(false)
 
   const recipeId = recipe.id
   const truncateRecipeSummary = (recipeSummary) => {
@@ -44,7 +43,6 @@ const RecipeTile = ({ recipe }) => {
         throw error
       }
       saved()
-      setRecipeSaved(true)
     } catch (error) {
       warning()
       console.error(`Error in fetch: ${error.message}`)
@@ -54,14 +52,6 @@ const RecipeTile = ({ recipe }) => {
   const onSaveHandler = () => {
     saveRecipe(recipe)
   }
-
-  const saveRemoveButton = recipeSaved ? <button
-    className="card__btn" onClick={onSaveHandler}>
-    Remove Recipe
-    </button> : <button
-    className="card__btn" onClick={onSaveHandler}>
-    Save Recipe
-    </button>
 
   return <div className="card">
     <div className="card__body">
@@ -84,7 +74,10 @@ const RecipeTile = ({ recipe }) => {
       </Link>
     </div>
     <div className="save-button-snackbar">
-      {saveRemoveButton}
+      <button
+        className="card__btn" onClick={onSaveHandler}>
+        Save Recipe
+    </button>
     </div>
   </div>
 }
