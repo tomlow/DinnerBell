@@ -5,7 +5,6 @@ const RecipeShowPage = (props) => {
   const recipeSteps = recipe.instructions.map((instruction, index) => {
     return <li key={index}>{instruction.step}</li>
   })
-
   const recipeIngredients = recipe.extendedIngredients.map((ingredient, index) => {
     return <li key={index}>{ingredient.amount} {ingredient.unit} {ingredient.name}</li>
   })
