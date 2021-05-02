@@ -10,7 +10,7 @@ const Pantry = ({ currentUser }) => {
 
   const myStorage = window.sessionStorage
 
-  if (currentUser) {
+  if (currentUser && !myStorage.getItem("userData")) {
     if (myStorage.getItem("recipeData") !== null && JSON.parse(myStorage.getItem("userData")).id === currentUser.id && recipes.length === 0) {
       const recipeDataParsed = JSON.parse(myStorage.getItem("recipeData"))
       setRecipes(recipeDataParsed)
@@ -18,8 +18,8 @@ const Pantry = ({ currentUser }) => {
   }
 
   const warning = () => {
-    message.warning('No ingredients to search by!');
-  };
+    message.warning('No ingredients to search by!')
+  }
 
   const loading = () => {
     message.loading("Gathering cookbooks...", 1.5)
@@ -57,8 +57,8 @@ const Pantry = ({ currentUser }) => {
       const response = await fetch(`/api/v1/recipes/?ingredientList=${ingredientQueryString}`)
       if (!response.ok) {
         const errorMessage = `${response.status} (${response.statusText})`
-        const error = new Error(errorMessage);
-        throw (error);
+        const error = new Error(errorMessage)
+        throw (error)
       }
       const responseBody = await response.json()
       const recipeData = responseBody.recipeData
@@ -69,7 +69,7 @@ const Pantry = ({ currentUser }) => {
       myStorage.setItem("userData", currentUserJSON)
       setRecipes(recipeData)
     } catch (error) {
-      console.error(`Error in fetch: ${error.message}`);
+      console.error(`Error in fetch: ${error.message}`)
     }
   }
 
