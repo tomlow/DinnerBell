@@ -2,7 +2,9 @@ import React from "react"
 import { message } from "antd"
 import { Link } from "react-router-dom"
 
-const RecipeTile = ({ recipe, currentUser }) => {
+
+const RecipeTile = ({ recipe }) => {
+  
   const recipeId = recipe.id
   const truncateRecipeSummary = (recipeSummary) => {
     if (recipeSummary.length > 100) {

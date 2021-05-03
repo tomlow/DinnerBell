@@ -4,15 +4,17 @@ Let's get cooking.
 
 ## Overview
 
-<b>DinnerBell</b> is a web application that solves the problem of not knowing what to cook. It allows a user to enter the ingredients in their pantry and see a list of recommended recipes based on their inventory. They can save recipes they like to their profile for later, where they will appear in different color gradients depending on whether their required ingredients are still in the user's pantry. Additionally, each recipe's show page will display summary information, required ingredients, missing ingredients if any, and instructions for cooking.
+<b>DinnerBell</b> is a web application that solves the problem of not knowing what to cook. It allows a user to enter the ingredients in their pantry and see a list of recommended recipes. They can save recipes they like to their profile for later, where they will appear in different color gradients depending on whether the user has the right ingredients or not. Additionally, each recipe's show page will display summary information, required ingredients, missing ingredients if any, and instructions for cooking.
 
 ## In-Depth Structure
 
-DinnerBell uses the Spoonacular API and a series of fetch requests, nested routers, and careful serialization to ensure that relevant and complete data is returned based on the user's needs. A modular, component-based React front end manages complex state and props to dynamically update the UI with the returned data as the user interacts with the site. Ant design components, the React Async library, and custom Sass styling with a Foundation base ensure that these interactions are smooth and intuitive.
+DinnerBell uses the Spoonacular API and robust data normalization and massaging to ensure that relevant and complete results are returned to the user. A modular React front end manages complex state and props to dynamically update the UI with the returned data as the user interacts with the site. Ant design components, the React Async library, and custom Sass styling with a Foundation base ensure that these interactions are smooth and intuitive.
 
-Finally, a postgreSQL relational database structure backs user data in a low-runtime, separated fashion, and use of the Objection ORM and Knex schema generators make interacting with the database low-cost and easily modular.
+Finally, a postgreSQL relational database structure stores user data and use of the Objection ORM and Knex query builder library make interacting with the database fast and easily customized.
 
-This application also uses AWS image storage, session storage, and Cypress testing.
+This application also uses S3 image storage, session storage, and end-to-end Cypress testing.
+
+Watch a demo of the site [here](), or visit the heroku page and try it yourself!
 
 [Click here to visit DinnerBell's Heroku page](https://launch31-dinner-bell-app.herokuapp.com/)
 
@@ -54,5 +56,5 @@ Seeds database with sample ingredients for a demonstration or test. Must be regi
 ## Coming Soon
 
 - Shopping list feature--automatically remove ingredients used in recipes from your pantry and add them to a shopping list.
-- Dietary options when searching recipes
+- Dietary filters when searching recipes
 - Inter-user messaging

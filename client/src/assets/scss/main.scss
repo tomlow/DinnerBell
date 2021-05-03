@@ -467,6 +467,7 @@ ul.show-ingredients {
   transition: transform 200ms ease-in;
   text-align: center;
   padding-bottom: 1rem;
+  z-index: 0;
 
   &__image {
     height: 12rem;
