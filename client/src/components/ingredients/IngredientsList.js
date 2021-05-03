@@ -83,7 +83,7 @@ const IngredientsList = ({ inventory, setInventory, currentUser }) => {
   }
 
   const inventoryList = inventory.map((ingredient, index) => {
-    return <IngredientListItem key={index} ingredient={ingredient} deleteIngredient={deleteIngredient} />
+    return <IngredientListItem key={index} ingredient={ingredient} deleteIngredient={deleteIngredient} currentUser={currentUser} />
   })
 
   return <div>

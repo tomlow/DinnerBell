@@ -13,7 +13,7 @@ const RecipeTile = ({ recipe, currentUser }) => {
   }
 
   const signInPrompt = () => {
-    message.info("Sign up to save recipes to your profile for later!")
+    message.info("Sign up to save recipes to your profile and edit ingredients!")
   }
 
   const saved = () => {

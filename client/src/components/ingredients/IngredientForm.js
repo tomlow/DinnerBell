@@ -47,7 +47,7 @@ const IngredientForm = ({ postIngredient }) => {
         />
       </div>
     </label >
-    <input className="button" type="submit" value="Put it in the Pantry" onSubmit={onSubmitHandler} />
+    <input className="button ingredient-entry-button" type="submit" value="Put it in the Pantry" onSubmit={onSubmitHandler} />
   </form >
 }
 

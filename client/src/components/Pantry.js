@@ -9,8 +9,8 @@ const Pantry = ({ currentUser }) => {
   const [recipes, setRecipes] = useState([])
 
   const myStorage = window.sessionStorage
-  console.log("This is a rendering of the pantry page")
-  if (currentUser) {
+
+  if (currentUser && myStorage.getItem("userData")) {
     if (myStorage.getItem("recipeData") !== null && JSON.parse(myStorage.getItem("userData")).id === currentUser.id && recipes.length === 0) {
       const recipeDataParsed = JSON.parse(myStorage.getItem("recipeData"))
       setRecipes(recipeDataParsed)
@@ -43,7 +43,6 @@ const Pantry = ({ currentUser }) => {
   }
 
   useEffect(() => {
-    console.log("I'm the fetch inventory function and I run here!")
     fetchInventory()
   }, [])
 

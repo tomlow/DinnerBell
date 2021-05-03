@@ -1,4 +1,6 @@
-import React from "react"
+import React, { useEffect } from "react"
+
+import BackButton from "./BackButton.js"
 
 const RecipeShowPage = (props) => {
   const recipe = props.location.state.recipe
@@ -14,12 +16,19 @@ const RecipeShowPage = (props) => {
     return <li>{missedIngredient.name}<img src={`${missedIngredient.image}`} alt="missing ingredient" /></li>
   })
 
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
+
   return <div>
     <div className="show-container text-center">
-      <div className="show-title">
-        <h1>{recipe.title}</h1>
-        <div className="ready-serving-info">
-          <div className="ready-in">Ready in: {recipe.readyInMinutes} Minutes</div> <div className="serves">Serves {recipe.servings}</div>
+      <BackButton />
+      <div className="title-container">
+        <div className="show-title">
+          <h1>{recipe.title}</h1>
+          <div className="ready-serving-info">
+            <div className="ready-in">Ready in: {recipe.readyInMinutes} Minutes</div> <div className="serves">Serves {recipe.servings}</div>
+          </div>
         </div>
       </div>
       <div className="show-columns">

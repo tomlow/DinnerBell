@@ -11,9 +11,7 @@ const RecipeDisplay = ({ queryByIngredients, recipes, currentUser }) => {
   }
 
   return <div className={recipes.length > 0 ? "recipe-display-container text-center" : "recipe-button-container"} >
-    <div>
-      <button className="button" onClick={queryByIngredients}>What's for Dinner?</button>
-    </div>
+    <button className="button search-recipe-button" onClick={queryByIngredients}>What's for Dinner?</button>
     {recipeDisplay}
   </div >
 }
