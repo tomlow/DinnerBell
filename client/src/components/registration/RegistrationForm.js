@@ -1,57 +1,61 @@
-import React, { useState } from "react";
-import FormError from "../layout/FormError";
-import config from "../../config";
+import React, { useState } from "react"
+import { message } from "antd"
+import FormError from "../layout/FormError"
+import config from "../../config"
 
 const RegistrationForm = () => {
   const [userPayload, setUserPayload] = useState({
     email: "",
     password: "",
     passwordConfirmation: "",
-  });
+  })
 
-  const [errors, setErrors] = useState({});
+  const [errors, setErrors] = useState({})
 
-  const [shouldRedirect, setShouldRedirect] = useState(false);
+  const [shouldRedirect, setShouldRedirect] = useState(false)
 
   const validateInput = (payload) => {
-    setErrors({});
-    const { email, password, passwordConfirmation } = payload;
-    const emailRegexp = config.validation.email.regexp;
-    let newErrors = {};
+    setErrors({})
+    const { email, password, passwordConfirmation } = payload
+    const emailRegexp = config.validation.email.regexp
+    let newErrors = {}
     if (!email.match(emailRegexp)) {
       newErrors = {
         ...newErrors,
         email: "is invalid",
-      };
+      }
+      message.warning("Email is invalid")
     }
 
     if (password.trim() == "") {
       newErrors = {
         ...newErrors,
         password: "is required",
-      };
+      }
+      message.warning("Password is required")
     }
 
     if (passwordConfirmation.trim() === "") {
       newErrors = {
         ...newErrors,
         passwordConfirmation: "is required",
-      };
+      }
+      message.warning("Password Confirmation is required")
     } else {
       if (passwordConfirmation !== password) {
         newErrors = {
           ...newErrors,
           passwordConfirmation: "does not match password",
-        };
+        }
+        message.warning("Password Confirmation does not match Password")
       }
     }
-
-    setErrors(newErrors);
-  };
+    setErrors(newErrors)
+  }
 
   const onSubmit = (event) => {
-    event.preventDefault();
-    validateInput(userPayload);
+    event.preventDefault()
+    validateInput(userPayload)
     if (Object.keys(errors).length === 0) {
       fetch("/api/v1/users", {
         method: "post",
@@ -62,26 +66,26 @@ const RegistrationForm = () => {
       }).then((resp) => {
         if (resp.ok) {
           resp.json().then((user) => {
-            setShouldRedirect(true);
-          });
+            setShouldRedirect(true)
+          })
         } else {
-          const errorMessage = `${resp.status} (${resp.statusText})`;
-          const error = new Error(errorMessage);
-          throw error;
+          const errorMessage = `${resp.status} (${resp.statusText})`
+          const error = new Error(errorMessage)
+          throw error
         }
-      });
+      })
     }
-  };
+  }
 
   const onInputChange = (event) => {
     setUserPayload({
       ...userPayload,
       [event.currentTarget.name]: event.currentTarget.value,
-    });
-  };
+    })
+  }
 
   if (shouldRedirect) {
-    location.href = "/";
+    location.href = "/"
   }
 
   return (
@@ -134,7 +138,7 @@ const RegistrationForm = () => {
         </form>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default RegistrationForm;
+export default RegistrationForm
