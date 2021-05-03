@@ -26,7 +26,7 @@ const BioPage = (props) => {
     >
       <Meta
         title="Tom Low"
-        description="English Major, Teacher, and Theater Maker turned Software Engineer. I live for the point where art and logic collide, and I'm thrilled to start this new career." />
+        description="Full Stack Engineer with a background in AmeriCorps service and theater. I'm passionate about food and food justice, and I work to make the place where people and programs intersect a happier and more legible one." />
     </Card >
   </div>
 }

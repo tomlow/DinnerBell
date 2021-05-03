@@ -1,7 +1,9 @@
 import React from "react"
 import { Link } from "react-router-dom"
 
-const HomePage = (props) => {
+const HomePage = ({ currentUser }) => {
+
+  const guideRoute = "/guide"
   const pantryRoute = "/pantry"
   return <div className="cell small-12 text-center">
     <div className="home-page">
@@ -9,7 +11,7 @@ const HomePage = (props) => {
         <h1>Welcome to DinnerBell</h1>
       </div>
       <div>
-        <Link to={pantryRoute}><button className="button start-button"><h2>let's get cooking</h2></button></Link>
+        <Link to={currentUser ? pantryRoute : guideRoute}><button className="button start-button"><h2>let's get cooking</h2></button></Link>
       </div>
     </div >
   </div >

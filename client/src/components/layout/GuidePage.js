@@ -1,20 +1,22 @@
 import React from "react"
+import { Link } from "react-router-dom"
 import BioPage from "./BioPage.js"
 
 const GuidePage = (props) => {
   return (
-    <div className="bio-container">
+    <div className="guide-container">
       <h2>New to DinnerBell?</h2>
+      <div className="guide-points">
+        <p>Hi! This is a kitchen tracking app that lets you enter ingredients in your pantry and search recipes you can make with them.</p>
 
-      <p>Hi! This is a kitchen tracking app that lets you enter your ingredients and search recipes you can make with them.</p>
+        <p>I recommend you <Link to="/users/new">sign up</Link> for the best experience—that'll let you save recipes to your profile for later.</p>
 
-      <p>I recommend you sign up for the best experience—that'll let you save recipes to your profile for later.</p>
+        <p>If you're just looking to figure out tonight (as I was when I built this app), feel free to go ahead with the simple search <Link to="/pantry">here</Link>.</p>
+      </div>
 
-      <p>If you're just looking to figure out tonight (as I was when I built this app), feel free to go ahead with the simple search here.</p>
-
-      <p>The Creator</p>
+      <h2>Meet the Creator</h2>
       <BioPage />
-    </div>
+    </div >
   )
 }
 
