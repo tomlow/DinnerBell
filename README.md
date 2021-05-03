@@ -14,8 +14,8 @@ Finally, a postgreSQL relational database structure stores user data and use of 
 
 This application also uses S3 image storage, session storage, and end-to-end Cypress testing.
 
-Watch a demo of the site [here](), or visit the heroku page and try it yourself!
-
+[Watch a demo here](https://vimeo.com/544460383)
+Or
 [Click here to visit DinnerBell's Heroku page](https://launch31-dinner-bell-app.herokuapp.com/)
 
 ## Technologies Used
