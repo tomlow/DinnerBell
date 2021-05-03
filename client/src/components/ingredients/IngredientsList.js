@@ -39,6 +39,7 @@ const IngredientsList = ({ inventory, setInventory, currentUser }) => {
       }),
       body: JSON.stringify(formPayload)
     })
+
     if (!response.ok) {
       if (response.status === 422) {
         const body = await response.json()
