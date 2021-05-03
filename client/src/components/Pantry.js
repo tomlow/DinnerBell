@@ -7,6 +7,7 @@ import RecipeDisplay from "./recipes/RecipeDisplay.js"
 const Pantry = ({ currentUser }) => {
   const [inventory, setInventory] = useState([])
   const [recipes, setRecipes] = useState([])
+  const [ingredientsPresent, setIngredientsPresent] = useState([false])
 
   const myStorage = window.sessionStorage
 
@@ -15,6 +16,12 @@ const Pantry = ({ currentUser }) => {
       const recipeDataParsed = JSON.parse(myStorage.getItem("recipeData"))
       setRecipes(recipeDataParsed)
     }
+  }
+  if (myStorage.getItem("recipeData") !== null && recipes.length === 0) {
+    const recipeDataParsed = JSON.parse(myStorage.getItem("recipeData"))
+    console.log("I'm running")
+    setIngredientsPresent([!ingredientsPresent[0]])
+    setRecipes(recipeDataParsed)
   }
 
   const warning = () => {
@@ -43,8 +50,15 @@ const Pantry = ({ currentUser }) => {
   }
 
   useEffect(() => {
-    fetchInventory()
-  }, [])
+    if (!currentUser && myStorage.getItem("ingredientData") !== null) {
+      const ingredientData = JSON.parse(myStorage.getItem("ingredientData"))
+      console.log(inventory)
+      console.log(ingredientData)
+      setInventory([...inventory, ingredientData])
+    } else if (currentUser) {
+      fetchInventory()
+    }
+  }, ingredientsPresent)
 
   const queryByIngredients = async () => {
     if (inventory.length === 0) {
@@ -64,9 +78,11 @@ const Pantry = ({ currentUser }) => {
       const recipeData = responseBody.recipeData
       myStorage.clear()
       const recipeDataJSON = JSON.stringify(recipeData)
-      const currentUserJSON = JSON.stringify(currentUser)
       myStorage.setItem("recipeData", recipeDataJSON)
-      myStorage.setItem("userData", currentUserJSON)
+      if (currentUser) {
+        const currentUserJSON = JSON.stringify(currentUser)
+        myStorage.setItem("userData", currentUserJSON)
+      }
       setRecipes(recipeData)
     } catch (error) {
       console.error(`Error in fetch: ${error.message}`)
@@ -74,7 +90,7 @@ const Pantry = ({ currentUser }) => {
   }
 
   return <div className="pantry-container">
-    <IngredientsList inventory={inventory} setInventory={setInventory} currentUser={currentUser} />
+    <IngredientsList inventory={inventory} setInventory={setInventory} currentUser={currentUser} myStorage={myStorage} />
     <RecipeDisplay queryByIngredients={queryByIngredients} recipes={recipes} currentUser={currentUser} />
   </div>
 }

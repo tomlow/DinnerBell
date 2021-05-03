@@ -4,7 +4,7 @@ import { message } from "antd"
 import IngredientListItem from "./IngredientListItem.js"
 import IngredientForm from "./IngredientForm"
 
-const IngredientsList = ({ inventory, setInventory, currentUser }) => {
+const IngredientsList = ({ inventory, setInventory, currentUser, myStorage }) => {
   const [errors, setErrors] = useState([])
 
   const warning = () => {
@@ -29,6 +29,8 @@ const IngredientsList = ({ inventory, setInventory, currentUser }) => {
     }
 
     if (!currentUser) {
+      const ingredientDataJSON = JSON.stringify([...inventory, formPayload])
+      myStorage.setItem("ingredientData", ingredientDataJSON)
       return setInventory([...inventory, formPayload])
     }
 
