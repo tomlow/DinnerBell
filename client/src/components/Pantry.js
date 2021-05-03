@@ -10,7 +10,7 @@ const Pantry = ({ currentUser }) => {
 
   const myStorage = window.sessionStorage
 
-  if (currentUser && myStorage.getItem("userData")) {
+  if (currentUser && JSON.parse(myStorage.getItem("userData"))) {
     if (myStorage.getItem("recipeData") !== null && JSON.parse(myStorage.getItem("userData")).id === currentUser.id && recipes.length === 0) {
       const recipeDataParsed = JSON.parse(myStorage.getItem("recipeData"))
       setRecipes(recipeDataParsed)
@@ -43,7 +43,11 @@ const Pantry = ({ currentUser }) => {
   }
 
   useEffect(() => {
-    fetchInventory()
+    if (currentUser) {
+      const currentUserJSON = JSON.stringify(currentUser)
+      myStorage.setItem("userData", currentUserJSON)
+      fetchInventory()
+    }
   }, [])
 
   const queryByIngredients = async () => {
@@ -64,9 +68,7 @@ const Pantry = ({ currentUser }) => {
       const recipeData = responseBody.recipeData
       myStorage.clear()
       const recipeDataJSON = JSON.stringify(recipeData)
-      const currentUserJSON = JSON.stringify(currentUser)
       myStorage.setItem("recipeData", recipeDataJSON)
-      myStorage.setItem("userData", currentUserJSON)
       setRecipes(recipeData)
     } catch (error) {
       console.error(`Error in fetch: ${error.message}`)
