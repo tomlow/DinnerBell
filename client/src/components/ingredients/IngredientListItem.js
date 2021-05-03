@@ -4,12 +4,34 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEdit, faTrashAlt } from '@fortawesome/free-solid-svg-icons'
 import { Popconfirm } from "antd"
 
-const IngredientListItem = ({ ingredient, deleteIngredient }) => {
+const IngredientListItem = ({ ingredient, deleteIngredient, currentUser }) => {
 
   const onConfirmHandler = () => {
     deleteIngredient(ingredient)
   }
 
+  const icons = currentUser ? <div className="ingredient-icons">
+    <Link to={`/ingredients/edit/${ingredient.id}`}>
+      <FontAwesomeIcon icon={faEdit} className="ingredient-icon" />
+    </Link>
+    <Popconfirm
+      title="Are you sure?"
+      onConfirm={onConfirmHandler}
+      okText="Yes"
+      cancelText="No"
+    >
+      <FontAwesomeIcon icon={faTrashAlt} className="ingredient-icon" />
+    </Popconfirm>
+  </div> : <div className="ingredient-icons">
+    <Popconfirm
+      title="Are you sure?"
+      onConfirm={onConfirmHandler}
+      okText="Yes"
+      cancelText="No"
+    >
+      <FontAwesomeIcon icon={faTrashAlt} className="ingredient-icon" />
+    </Popconfirm>
+  </div>
 
   return <div className="ingredient-list-item">
     <div className="ingredient-right-column">
@@ -17,19 +39,7 @@ const IngredientListItem = ({ ingredient, deleteIngredient }) => {
     </div>
     <div className="ingredient-left-column text-center">
       <p className="ingredient-name">{ingredient.name}</p>
-      <div className="ingredient-icons">
-        <Link to={`/ingredients/edit/${ingredient.id}`}>
-          <FontAwesomeIcon icon={faEdit} className="ingredient-icon" />
-        </Link>
-        <Popconfirm
-          title="Are you sure?"
-          onConfirm={onConfirmHandler}
-          okText="Yes"
-          cancelText="No"
-        >
-          <FontAwesomeIcon icon={faTrashAlt} className="ingredient-icon" />
-        </Popconfirm>
-      </div>
+      {icons}
     </div>
   </div>
 }

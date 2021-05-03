@@ -1,27 +1,28 @@
 import React, { useState } from "react"
-import AsyncSelect from 'react-select/async';
+import AsyncSelect from 'react-select/async'
 
 const IngredientForm = ({ postIngredient }) => {
-  const [inputValue, setInputValue] = useState('');
+  const [inputValue, setInputValue] = useState('')
   const [selectedValue, setSelectedValue] = useState({
     name: "",
     image: ""
-  });
+  })
 
   const handleInputChange = value => {
     setInputValue(value)
-  };
+  }
   const handleChange = value => {
     setSelectedValue(value)
   }
 
   const loadOptions = (inputValue) => {
     return fetch(`/api/v1/ingredients/autocomplete?query=${inputValue}`).then(res => res.json())
-  };
+  }
 
   const onSubmitHandler = (event) => {
     event.preventDefault()
     postIngredient(selectedValue)
+
     setSelectedValue({
       name: "",
       image: ""
@@ -29,7 +30,7 @@ const IngredientForm = ({ postIngredient }) => {
   }
 
   return <form onSubmit={onSubmitHandler}>
-    <label className="ingredient-form-label">What are you working with?
+    <label className="ingredient-form-label">Enter ingredients below to fill your pantry, then click 'What's for Dinner' to see what you can make!
       <div className="autocomplete container">
         <AsyncSelect
           value={selectedValue}
@@ -46,7 +47,7 @@ const IngredientForm = ({ postIngredient }) => {
         />
       </div>
     </label >
-    <input className="button" type="submit" value="Put it in the Pantry" onSubmit={onSubmitHandler} />
+    <input className="button ingredient-entry-button" type="submit" value="Put it in the Pantry" onSubmit={onSubmitHandler} />
   </form >
 }
 

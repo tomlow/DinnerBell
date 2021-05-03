@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from "react"
+import React, { useState } from "react"
 import _ from "lodash"
 import { message } from "antd"
 import IngredientListItem from "./IngredientListItem.js"
 import IngredientForm from "./IngredientForm"
 
-const IngredientsList = ({ inventory, setInventory }) => {
+const IngredientsList = ({ inventory, setInventory, currentUser }) => {
   const [errors, setErrors] = useState([])
 
   const warning = () => {
@@ -26,6 +26,10 @@ const IngredientsList = ({ inventory, setInventory }) => {
 
     if (formPayload.name === "") {
       return emptyWarning()
+    }
+
+    if (!currentUser) {
+      return setInventory([...inventory, formPayload])
     }
 
     const response = await fetch('/api/v1/ingredients', {
@@ -56,6 +60,13 @@ const IngredientsList = ({ inventory, setInventory }) => {
   }
 
   const deleteIngredient = async (ingredientPayload) => {
+    if (!currentUser) {
+      const toDelete = inventory.find(ingredient => ingredient.name === ingredientPayload.name)
+      const deleteIdx = inventory.indexOf(toDelete)
+      inventory.splice(deleteIdx, 1)
+      return setInventory([...inventory])
+    }
+
     try {
       const response = await fetch(`/api/v1/ingredients/${ingredientPayload.id}`, {
         method: "DELETE",
@@ -73,7 +84,7 @@ const IngredientsList = ({ inventory, setInventory }) => {
   }
 
   const inventoryList = inventory.map((ingredient, index) => {
-    return <IngredientListItem key={index} ingredient={ingredient} deleteIngredient={deleteIngredient} />
+    return <IngredientListItem key={index} ingredient={ingredient} deleteIngredient={deleteIngredient} currentUser={currentUser} />
   })
 
   return <div>
@@ -81,7 +92,7 @@ const IngredientsList = ({ inventory, setInventory }) => {
       <h1>Welcome to your pantry, Master Chef!</h1>
       <IngredientForm postIngredient={postIngredient} />
     </div>
-    <div className="ingredient-list-container grid-x">
+    <div className={inventory.length > 0 ? "ingredient-list-container grid-x" : ""}>
       <div className="ingredient-list large-12 cell">
         {inventoryList}
       </div>

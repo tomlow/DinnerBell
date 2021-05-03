@@ -74,8 +74,8 @@ const Pantry = ({ currentUser }) => {
   }
 
   return <div className="pantry-container">
-    <IngredientsList inventory={inventory} setInventory={setInventory} />
-    <RecipeDisplay queryByIngredients={queryByIngredients} recipes={recipes} />
+    <IngredientsList inventory={inventory} setInventory={setInventory} currentUser={currentUser} />
+    <RecipeDisplay queryByIngredients={queryByIngredients} recipes={recipes} currentUser={currentUser} />
   </div>
 }
 

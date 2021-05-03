@@ -81,16 +81,30 @@ body {
 
 .sign-in-button {
   align-self: center;
+  border-radius: 40px;
 }
 
 .sign-up-button {
   align-self: center;
   margin: 0;
+  border-radius: 40px;
 }
 
 .sign-out-button {
   align-self: center;
   margin: 0;
+  border-radius: 40px;
+}
+
+.navigation-container {
+  background-color: rgba(255, 255, 255, 0.8);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  margin-top: 10rem;
+  width: 75%;
+  margin: auto;
+  align-self: center;
+  padding: 2rem;
+  border-radius: 6px;
 }
 
 .sign-in-container {
@@ -146,16 +160,56 @@ body {
   letter-spacing: 3px;
   color: var(--clr-primary);
   text-shadow: 2px 2px rgb(92, 12, 12);
-  // text-transform: lowercase;
   font-style: italic;
   padding: 0px;
   line-height: 120px;
+}
+
+.guide-container {
+  background-color: rgba(255, 255, 255, 0.8);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  margin-top: 10rem;
+  width: 75%;
+  margin: auto;
+  text-align: center;
+  padding: 2rem;
+  border-radius: 6px;
+  font-family: "Merriweather";
+}
+
+.guide-points {
+  font-size: 16px;
+  background-color: rgba(255, 255, 255, 0.8);
+  opacity: 0.8;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  border-radius: 4px;
+  font-family: Muli;
+  font-weight: bold;
+}
+
+.bio {
+  text-align: center;
 }
 
 .start-button {
   height: 3.5rem;
   padding: 1rem;
   padding-bottom: 4.5rem;
+  border-radius: 45px;
+}
+
+.bio-card {
+  width: 270px;
+  height: auto;
+  border-radius: 15px;
+  margin: auto;
+  cursor: default;
+}
+
+.ingredient-form-label {
+  background-color: #f1beb0;
+  margin: auto;
+  border-radius: 16px;
 }
 
 .ingredient-form-container {
@@ -195,6 +249,10 @@ body {
   border-radius: 6px;
 }
 
+.ingredient-entry-button {
+  border-radius: 12px;
+}
+
 .ingredient-list-container {
   background-color: white;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
@@ -215,6 +273,7 @@ body {
 .ingredient-list-item {
   display: flex;
   justify-content: space-around;
+  align-items: baseline;
   margin: auto 30px;
   margin-bottom: 20px;
   width: 15vw;
@@ -245,6 +304,20 @@ body {
   color: var(--clr-primary);
 }
 
+.search-recipe-button {
+  border-radius: 14px;
+}
+
+.recipe-button-container {
+  text-align: center;
+  width: 200px;
+  height: 80px;
+  background-color: rgba(255, 255, 255, 0.8);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  margin: auto;
+  border-radius: 14px;
+}
+
 .tile-container {
   font-family: "Merriweather", "Muli";
   margin: 2rem;
@@ -256,7 +329,6 @@ body {
 }
 
 .grid-container {
-  // font-family: "Merriweather", "Muli";
   max-width: 75rem;
   margin-left: auto;
   margin-right: auto;
@@ -274,6 +346,11 @@ body {
   align-self: center;
   padding: 1rem;
   border-radius: 6px;
+}
+
+.title-container {
+  width: 80%;
+  margin: auto;
 }
 
 .show-title {
@@ -352,6 +429,31 @@ ul.show-ingredients {
   margin: auto;
   align-self: center;
   border-radius: 6px;
+}
+
+.back-button {
+  // display: inline-block;
+  float: left;
+  margin-right: 0;
+  cursor: pointer;
+}
+
+.back-button-text {
+  background-color: #f1beb0;
+  padding: 0.25rem;
+  border-radius: 16px;
+}
+
+.modal-blurb {
+  background-color: #f1beb0;
+  width: 17%;
+  margin: auto;
+  border-radius: 16px;
+}
+
+.modal-link {
+  cursor: pointer;
+  color: #d50000;
 }
 
 .card {
