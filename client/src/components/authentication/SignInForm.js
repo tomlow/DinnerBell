@@ -90,7 +90,6 @@ const SignInForm = () => {
             <FormError error={errors.password} />
           </label>
         </div>
-
         <div>
           <input type="submit" className="button registration-button" value="Sign In" />
         </div>
